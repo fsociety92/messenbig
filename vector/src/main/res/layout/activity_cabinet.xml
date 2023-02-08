@@ -343,7 +343,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="4990₸"
+                        android:text="6990₸"
                         android:textColor="#A763CF"
                         android:textSize="20sp"
                         android:textStyle="bold"

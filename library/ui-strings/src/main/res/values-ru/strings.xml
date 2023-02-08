@@ -63,7 +63,7 @@
     <string name="instagram_kz_example">instagram.kz/example</string>
     <string name="website_kz_example">website.kz/example</string>
     <string name="ddmmyyyy">дд.мм.гггг</string>
-    <string name="ad_days">суток</string>
+    <string name="ad_days">Месяцев</string>
     <string name="hours24">24ч</string>
     <string name="title">Заголовок</string>
     <string name="description">Описание</string>

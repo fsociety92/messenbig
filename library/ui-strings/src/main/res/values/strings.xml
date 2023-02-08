@@ -526,8 +526,12 @@
 
     <string name="option_send_voice">Send voice</string>
 
-    <string name="start_voice_call_prompt_msg">Are you sure that you want to start a voice call?</string>
-    <string name="start_video_call_prompt_msg">Are you sure that you want to start a video call?</string>
+    <string name="start_voice_call_prompt_msg" tools:ignore="MissingTranslation">Are you sure that you want to start a voice call?</string>
+    <string name="start_video_call_prompt_msg" tools:ignore="MissingTranslation">Are you sure that you want to start a video call?</string>
+    <string name="message_reply_to_ended_poll_preview" tools:ignore="MissingTranslation">Survey completed</string>
+    <string name="message_reply_to_poll_preview" tools:ignore="MissingTranslation">Vote</string>
+    <string name="message_reply_to_sender_ended_poll" tools:ignore="MissingTranslation">completed a survey.</string>
+
 
     <!-- Note to translators: the translation MUST contain the string "${app_name}", which will be replaced by the application name -->
     <string name="call_failed_no_connection">${app_name} Call Failed</string>
@@ -2314,8 +2318,6 @@
     <string name="sent_verification_conclusion">Verification Conclusion</string>
     <string name="sent_location">Shared their location</string>
     <string name="sent_live_location">Shared their live location</string>
-    <string name="started_a_voice_broadcast">Started a voice broadcast</string>
-
     <string name="verification_request_waiting">Waiting…</string>
     <string name="verification_request_other_cancelled">%s canceled</string>
     <string name="verification_request_you_cancelled">You canceled</string>
@@ -3553,13 +3555,12 @@
     <string name="ad_time_for_ad">Display time</string>
     <string name="ddmmyyyy">dd.mm.yyyy</string>
     <string name="ad_value_of_days" />
-    <string name="ad_days">days</string>
+    <string name="ad_days">months</string>
     <string name="ad_numberof">Enter number </string>
-    <string name="hours24">24h</string>
+    <string name="hours24">1m</string>
     <string name="title">Title</string>
     <string name="description">Description</string>
     <string name="started_a_voice_broadcast">Started a voice broadcast</string>
-    <string name="error_voice_broadcast_unable_to_play">Unable to play this voice broadcast.</string>
     <string name="room_profile_section_more_polls">Poll history</string>
     <string name="error_voice_message_broadcast_in_progress">Cannot start voice message</string>
     <string name="error_voice_message_broadcast_in_progress_message">You can’t start a voice message as you are currently recording a live broadcast. Please end your live broadcast in order to start recording a voice message</string>
