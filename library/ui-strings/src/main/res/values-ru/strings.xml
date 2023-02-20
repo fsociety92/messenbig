@@ -63,7 +63,7 @@
     <string name="instagram_kz_example">instagram.kz/example</string>
     <string name="website_kz_example">website.kz/example</string>
     <string name="ddmmyyyy">дд.мм.гггг</string>
-    <string name="ad_days">Месяцев</string>
+    <string name="ad_days">суток</string>
     <string name="hours24">24ч</string>
     <string name="title">Заголовок</string>
     <string name="description">Описание</string>
@@ -2419,7 +2419,7 @@
     <string name="encryption_has_been_misconfigured">Шифрование настроено неправильно.</string>
     <string name="sent_location">Поделился(лась) местоположением</string>
     <string name="login_splash_already_have_account">Войти</string>
-    <string name="login_splash_create_account">Зарегестрироваться</string>
+    <string name="login_splash_create_account">Зарегистрироваться</string>
     <string name="ftue_auth_carousel_workplace_title">Обмен сообщениями для вашей команды.</string>
     <string name="ftue_auth_carousel_encrypted_body">Используй безопасное и быстрое соединение в 179 странах мира бесплатно.</string>
     <string name="storage5g">Есть возможность отправки необходимых файлов  напрямую в облачное хранение  получателя с двойным шифрованием.</string>
@@ -2691,7 +2691,7 @@
     <string name="ftue_auth_email_entry_title">Электронная почта</string>
     <string name="ftue_auth_email_title">Введите адрес электронной почты</string>
     <string name="ftue_auth_phone_subtitle">Пожалуйста введите в номер в международном формате например: +77077777777</string>
-    <string name="invalid_phone" tools:ignore="ExtraTranslation">Номер телефона ещетне зарегестрирован</string>
+    <string name="invalid_phone" tools:ignore="ExtraTranslation">Номер телефона еще не зарегистрирован</string>
     <string name="ftue_auth_terms_title">Правила сервера</string>
     <string name="ftue_auth_choose_server_entry_hint">URL-адрес сервера</string>
     <string name="ftue_auth_welcome_back_title">С возвращением!</string>

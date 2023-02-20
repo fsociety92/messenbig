@@ -157,14 +157,14 @@ class RoomListFragment :
     }
 
     private fun citiesSelection() {
-        if (requireActivity().getSharedPreferences("bigstar", AppCompatActivity.MODE_PRIVATE).getString(
-                        "city",
-                        ""
-                )!!.isEmpty()) {
-            startActivity(Intent(activity, CountriesActivity::class.java))
-        } else {
-            setupAdBanners()
-        }
+            if (requireActivity().getSharedPreferences("bigstar", AppCompatActivity.MODE_PRIVATE).getString(
+                            "city",
+                            ""
+                    )!!.isEmpty()) {
+                startActivity(Intent(activity, CountriesActivity::class.java))
+            } else {
+                setupAdBanners()
+            }
     }
 
     private fun setupAdBanners() {
@@ -287,8 +287,7 @@ class RoomListFragment :
                         (it.contentEpoxyController as? RoomSummaryPagedController)?.roomChangeMembershipStates = ms
                     }
         }
-
-        citiesSelection()
+            citiesSelection()
     }
 
     override fun onStart() {

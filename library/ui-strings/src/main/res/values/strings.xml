@@ -3557,7 +3557,7 @@
     <string name="ad_value_of_days" />
     <string name="ad_days">months</string>
     <string name="ad_numberof">Enter number </string>
-    <string name="hours24">1m</string>
+    <string name="hours24">1d</string>
     <string name="title">Title</string>
     <string name="description">Description</string>
     <string name="started_a_voice_broadcast">Started a voice broadcast</string>

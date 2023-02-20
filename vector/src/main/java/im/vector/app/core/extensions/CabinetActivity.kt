@@ -58,7 +58,7 @@ fun String.toEditable(): Editable = Editable.Factory.getInstance().newEditable(t
 class
 CabinetActivity : AppCompatActivity() {
 
-    private val price = 6990
+    private val price = 250
     private var total = 0
 
     private var bannerFile: File? = null

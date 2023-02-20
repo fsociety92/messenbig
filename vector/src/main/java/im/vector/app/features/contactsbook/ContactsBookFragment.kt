@@ -62,7 +62,7 @@ import reactivecircus.flowbinding.android.widget.checkedChanges
 import reactivecircus.flowbinding.android.widget.textChanges
 import reactivecircus.flowbinding.common.InitialValueFlow
 import javax.inject.Inject
-import kotlin.reflect.jvm.internal.ReflectProperties.Val
+//import kotlin.reflect.jvm.internal.ReflectProperties.Val
 
 @AndroidEntryPoint
 class ContactsBookFragment :
