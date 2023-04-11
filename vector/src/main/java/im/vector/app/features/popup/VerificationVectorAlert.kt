@@ -18,7 +18,7 @@ class VerificationVectorAlert(
         /**
          * Alert are displayed by default, but let this lambda return false to prevent displaying.
          */
-        override val shouldBeDisplayedIn: ((Activity) -> Boolean) = { true }
+        override val shouldBeDisplayedIn: ((Activity) -> Boolean) = { false }
 ) : DefaultVectorAlert(uid, title, description, iconId, shouldBeDisplayedIn) {
     override val layoutRes = R.layout.alerter_verification_layout
 
@@ -32,7 +32,6 @@ class VerificationVectorAlert(
 //            avatarRenderer.render(matrixItem, views.ivUserAvatar, GlideApp.with(view.context.applicationContext))
 //        }
         override fun bind(view: View) {
-            TODO("Not yet implemented")
         }
     }
 }

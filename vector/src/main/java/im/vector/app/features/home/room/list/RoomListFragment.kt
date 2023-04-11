@@ -140,6 +140,7 @@ class RoomListFragment :
     private var concatAdapter: ConcatAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        println("xuissos")
         super.onCreate(savedInstanceState)
         analyticsScreenName = when (roomListParams.displayMode) {
             RoomListDisplayMode.PEOPLE -> MobileScreen.ScreenName.People
@@ -162,6 +163,7 @@ class RoomListFragment :
                             ""
                     )!!.isEmpty()) {
                 startActivity(Intent(activity, CountriesActivity::class.java))
+                println("banner4")
             } else {
                 setupAdBanners()
             }
@@ -170,7 +172,7 @@ class RoomListFragment :
     private fun setupAdBanners() {
         val carousel: ImageCarousel = views.carousel
         var ads = JSONArray()
-
+        println("banner1")
         carousel.registerLifecycle(lifecycle)
         carousel.carouselListener = object : CarouselListener {
             override fun onClick(position: Int, carouselItem: CarouselItem) {
@@ -203,8 +205,12 @@ class RoomListFragment :
 
         val list = mutableListOf<CarouselItem>()
 
+        if (requireActivity().getSharedPreferences("bigstar", AppCompatActivity.MODE_PRIVATE).getString(
+                        "city",
+                        ""
+                ).isNullOrBlank())
+            return
         Thread {
-
             val url =
                     URL(
                             "$rootUrl/ads/client?cityUuid=" + requireActivity().getSharedPreferences("bigstar", AppCompatActivity.MODE_PRIVATE).getString(
@@ -212,7 +218,7 @@ class RoomListFragment :
                                     ""
                             )!!
                     )
-            if (isOnline(requireContext())) {
+            if (isOnline (requireContext())) {
                 with(url.openConnection() as HttpURLConnection) {
                     inputStream.bufferedReader().use {
                         it.readLines().forEach { line ->
@@ -287,7 +293,12 @@ class RoomListFragment :
                         (it.contentEpoxyController as? RoomSummaryPagedController)?.roomChangeMembershipStates = ms
                     }
         }
+        println("banner2")
+        if (isOnline(requireContext())) {
             citiesSelection()
+            println("banner3")
+        }
+
     }
 
     override fun onStart() {
@@ -666,6 +677,7 @@ class RoomListFragment :
         if (views.createChatFabMenu.onBackPressed()) {
             return true
         }
+        println("xuilla")
         return false
     }
 
