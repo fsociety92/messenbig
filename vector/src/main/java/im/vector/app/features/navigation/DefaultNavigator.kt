@@ -355,6 +355,10 @@ class DefaultNavigator @Inject constructor(
         context.startActivity(intent)
     }
 
+    override fun giveAdd(context: Context) {
+        TODO("Not yet implemented")
+    }
+
     override fun openSettings(context: Context, directAccess: Int) {
         val intent = VectorSettingsActivity.getIntent(context, directAccess)
         context.startActivity(intent)
