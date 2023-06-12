@@ -276,7 +276,7 @@ dependencies {
 //    implementation('com.facebook.react:react-native-amplitude:2.7.0-jitsi-12421094')
     // Jitsi
     // Note: version is 6.2.0, but built from the tag `android-sdk-6.2.2`.
-    api('org.jitsi.react:jitsi-meet-sdk:7.0.1') {
+    api('org.jitsi.react:jitsi-meet-sdk:8.1.2') {
         exclude group: 'com.google.firebase'
         exclude group: 'com.google.android.gms'
         exclude group: 'com.android.installreferrer'
