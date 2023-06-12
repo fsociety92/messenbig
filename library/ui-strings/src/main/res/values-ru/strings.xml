@@ -60,6 +60,7 @@
     <string name="choose_city">Выберите ваш город</string>
     <string name="change_city_later">Позже вы в любой момент сможете\nизменить свой город в настройках</string>
     <string name="youtube_com_example">youtube.com/example</string>
+    <string name="phone_example">Номер телефона</string>
     <string name="instagram_kz_example">instagram.kz/example</string>
     <string name="website_kz_example">website.kz/example</string>
     <string name="ddmmyyyy">дд.мм.гггг</string>
@@ -1222,6 +1223,8 @@
     <string name="settings">Настройки</string>
     <string name="devices_current_device">Текущая сессия</string>
     <string name="devices_other_devices">Другие сессии</string>
+    <string name="oblachka">Облачное хранилище(скоро)</string>
+    <string name="give_an_add">Подать рекламу</string>
     <string name="create_room_encryption_title">Включить шифрование</string>
     <string name="verification_conclusion_warning">Недоверенный вход</string>
     <string name="room_profile_section_more_uploads">Вложения</string>
@@ -2522,6 +2525,7 @@
     <string name="ftue_display_name_subtitle">Показывается, когда вы отправляете сообщения.</string>
     <string name="ftue_display_name_title">Выберите отображаемое имя</string>
     <string name="ftue_account_created_subtitle">Ваша учётная запись %s создана</string>
+    <string name="ad_when_dialogs">В листе диалогов</string>
     <string name="ftue_account_created_congratulations_title">Поздравляем!</string>
     <string name="ftue_account_created_take_me_home">Домой</string>
     <string name="ftue_account_created_personalize">Персонализировать</string>
@@ -2544,6 +2548,15 @@
     <string name="initial_sync_request_title">Начальный запрос на синхронизацию</string>
     <string name="threads_beta_enable_notice_message">Обсуждения помогают поддерживать и легко отслеживать тематику бесед.%sВключение обсуждений обновит приложение. Может занять продолжительное время.</string>
     <string name="live_location_sharing_notification_description">Идёт отправка местоположения</string>
+    <string name="attachment_type_selector_gallery">Фото библиотека</string>
+    <string name="attachment_type_selector_sticker">Стикеры</string>
+    <string name="attachment_type_selector_file">Приложение</string>
+    <string name="attachment_type_selector_voice_broadcast">Голосовой подкаст</string>
+    <string name="attachment_type_selector_poll">Опрос</string>
+    <string name="attachment_type_selector_location">Локация</string>
+    <string name="attachment_type_selector_camera">Камера</string>
+    <string name="attachment_type_selector_contact">Контакты</string>
+    <string name="attachment_type_selector_text_formatting">Форматирование текста</string>
     <string name="location_share_live_remaining_time">Осталось %1$s</string>
     <string name="live_location_bottom_sheet_last_updated_at">Обновлено %1$s назад</string>
     <string name="live_location_bottom_sheet_stop_sharing">Остановить трансляцию</string>

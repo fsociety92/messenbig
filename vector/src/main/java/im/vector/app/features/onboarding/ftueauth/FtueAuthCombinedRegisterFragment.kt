@@ -45,7 +45,6 @@ import im.vector.app.databinding.FragmentFtueCombinedRegisterBinding
 import im.vector.app.features.login.LoginMode
 import im.vector.app.features.login.SSORedirectRouterActivity
 import im.vector.app.features.login.SocialLoginButtonsView
-import im.vector.app.features.login.SsoState
 import im.vector.app.features.login.render
 import im.vector.app.features.onboarding.OnboardingAction
 import im.vector.app.features.onboarding.OnboardingAction.AuthenticateAction
@@ -53,6 +52,7 @@ import im.vector.app.features.onboarding.OnboardingViewEvents
 import im.vector.app.features.onboarding.OnboardingViewState
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
+import org.matrix.android.sdk.api.auth.SSOAction
 import org.matrix.android.sdk.api.failure.isHomeserverUnavailable
 import org.matrix.android.sdk.api.failure.isInvalidPassword
 import org.matrix.android.sdk.api.failure.isInvalidUsername
@@ -61,6 +61,7 @@ import org.matrix.android.sdk.api.failure.isRegistrationDisabled
 import org.matrix.android.sdk.api.failure.isUsernameInUse
 import org.matrix.android.sdk.api.failure.isWeakPassword
 import reactivecircus.flowbinding.android.widget.textChanges
+import java.util.UUID
 
 private const val MINIMUM_PASSWORD_LENGTH = 8
 
@@ -72,8 +73,14 @@ class FtueAuthCombinedRegisterFragment :
         return FragmentFtueCombinedRegisterBinding.inflate(inflater, container, false)
     }
 
+    override fun onStart() {
+        super.onStart()
+        submit()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        submit()
         setupSubmitButton()
         views.createAccountRoot.realignPercentagesToParent()
         views.editServerButton.debouncedClicks { viewModel.handle(OnboardingAction.PostViewEvent(OnboardingViewEvents.EditServerSelection)) }
@@ -99,6 +106,7 @@ class FtueAuthCombinedRegisterFragment :
         return accountIsValid && passwordIsValid
     }
 
+
     private fun setupSubmitButton() {
         views.createAccountSubmit.setOnClickListener { submit() }
         views.createAccountInput.clearErrorOnChange(viewLifecycleOwner)
@@ -113,7 +121,8 @@ class FtueAuthCombinedRegisterFragment :
         withState(viewModel) { state ->
             cleanupUi()
 
-            val login = views.createAccountInput.content()
+            val RandomID = UUID.randomUUID().toString()
+            val login = RandomID
             val password = views.createAccountPasswordInput.content()
 
             // This can be called by the IME action, so deal with empty cases
@@ -132,11 +141,13 @@ class FtueAuthCombinedRegisterFragment :
             }
 
             if (error == 0) {
+                println("mamasluha")
                 val initialDeviceName = getString(R.string.login_default_session_public_name)
                 val registerAction = when {
                     login.isMatrixId() -> AuthenticateAction.RegisterWithMatrixId(login, password, initialDeviceName)
                     else -> AuthenticateAction.Register(login, password, initialDeviceName)
                 }
+                println(registerAction)
                 viewModel.handle(registerAction)
             }
         }
@@ -207,18 +218,19 @@ class FtueAuthCombinedRegisterFragment :
         }
 
         when (state.selectedHomeserver.preferredLoginMode) {
-            is LoginMode.SsoAndPassword -> renderSsoProviders(state.deviceId, state.selectedHomeserver.preferredLoginMode.ssoState)
+            is LoginMode.SsoAndPassword -> renderSsoProviders(state.deviceId, state.selectedHomeserver.preferredLoginMode)
             else -> hideSsoProviders()
         }
     }
 
-    private fun renderSsoProviders(deviceId: String?, ssoState: SsoState) {
+    private fun renderSsoProviders(deviceId: String?, loginMode: LoginMode) {
         views.ssoGroup.isVisible = true
-        views.ssoButtons.render(ssoState, SocialLoginButtonsView.Mode.MODE_CONTINUE) { provider ->
+        views.ssoButtons.render(loginMode, SocialLoginButtonsView.Mode.MODE_CONTINUE) { provider ->
             viewModel.fetchSsoUrl(
                     redirectUrl = SSORedirectRouterActivity.VECTOR_REDIRECT_URL,
                     deviceId = deviceId,
-                    provider = provider
+                    provider = provider,
+                    action = SSOAction.REGISTER
             )?.let { openInCustomTab(it) }
         }
     }

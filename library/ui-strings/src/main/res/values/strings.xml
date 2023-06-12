@@ -78,8 +78,8 @@
     <string name="notice_room_server_acl_set_ip_literals_allowed">• Servers matching IP literals are allowed.</string>
     <string name="notice_room_server_acl_set_ip_literals_not_allowed">• Servers matching IP literals are banned.</string>
 
-    <string name="notice_room_server_acl_updated_title">%s changed the server ACLs for this chat.</string>
-    <string name="notice_room_server_acl_updated_title_by_you">You changed the server ACLs for this chat.</string>
+    <string name="notice_room_server_acl_updated_title">%s changed the server ACLs for this room.</string>
+    <string name="notice_room_server_acl_updated_title_by_you">You changed the server ACLs for this room.</string>
     <plurals name="notice_room_server_acl_changes">
         <item quantity="one">%d server ACLs change</item>
         <item quantity="other">%d server ACLs changes</item>
@@ -91,13 +91,13 @@
     <string name="notice_room_server_acl_updated_ip_literals_allowed">• Servers matching IP literals are now allowed.</string>
     <string name="notice_room_server_acl_updated_ip_literals_not_allowed">• Servers matching IP literals are now banned.</string>
     <string name="notice_room_server_acl_updated_no_change">No change.</string>
-    <string name="notice_room_server_acl_allow_is_empty">🎉 All servers are banned from participating! This chat can no longer be used.</string>
+    <string name="notice_room_server_acl_allow_is_empty">🎉 All servers are banned from participating! This room can no longer be used.</string>
 
     <string name="notice_avatar_changed_too">(avatar was changed too)</string>
-    <string name="notice_room_name_removed">%1$s removed the chat name</string>
-    <string name="notice_room_name_removed_by_you">You removed the chat name</string>
-    <string name="notice_room_topic_removed">%1$s removed the chat topic</string>
-    <string name="notice_room_topic_removed_by_you">You removed the chat topic</string>
+    <string name="notice_room_name_removed">%1$s removed the room name</string>
+    <string name="notice_room_name_removed_by_you">You removed the room name</string>
+    <string name="notice_room_topic_removed">%1$s removed the room topic</string>
+    <string name="notice_room_topic_removed_by_you">You removed the room topic</string>
     <string name="notice_room_avatar_removed">%1$s removed the room avatar</string>
     <string name="notice_room_avatar_removed_by_you">You removed the room avatar</string>
     <string name="notice_room_third_party_invite">%1$s sent an invitation to %2$s to join the room</string>
@@ -134,7 +134,6 @@
     <string name="notice_crypto_unable_to_decrypt">** Unable to decrypt: %s **</string>
     <string name="notice_crypto_error_unknown_inbound_session_id">The sender\'s device has not sent us the keys for this message.</string>
     <string name="block_user1">Block user</string>
-
 
     <string name="notice_voice_broadcast_ended">%1$s ended a voice broadcast.</string>
     <string name="notice_voice_broadcast_ended_by_you">You ended a voice broadcast.</string>
@@ -872,6 +871,7 @@
     <string name="settings_notification_new_keyword">Add new keyword</string>
     <string name="settings_notification_keyword_contains_dot">Keywords cannot start with \'.\'</string>
     <string name="settings_notification_keyword_contains_invalid_character">Keywords cannot contain \'%s\'</string>
+    <string name="settings_notification_error_on_update">An error occurred when updating your notification preferences. Please try again.</string>
 
     <string name="settings_notification_troubleshoot">Troubleshoot Notifications</string>
     <string name="settings_troubleshoot_diagnostic">Troubleshooting diagnostics</string>
@@ -1010,11 +1010,11 @@
 
     <string name="settings_version">Version</string>
     <string name="settings_olm_version">olm version</string>
+    <string name="settings_app_term_conditions">Terms &amp; conditions</string>
+    <string name="settings_third_party_notices">Third party notices</string>
     <string name="politic_of_bigstar">By continue you are accept users
     <a href="https://www.bigstarpolitics.com.kz">BigStarMessenger private policy</a></string>
     <string name="linkOn">https://aiocorpkz.wixsite.com/politics</string>
-    <string name="settings_app_term_conditions">Terms &amp; conditions</string>
-    <string name="settings_third_party_notices">Third party notices</string>
     <string name="settings_copyright">Copyright</string>
     <string name="settings_privacy_policy">Privacy policy</string>
     <string name="settings_keep_media">Keep media</string>
@@ -1077,6 +1077,8 @@
     <string name="settings_discovery_category">Discovery</string>
     <string name="settings_discovery_manage">Manage your discovery settings.</string>
 
+    <string name="settings_external_account_management_title">Account</string>
+    <string name="settings_external_account_management">Your account details are managed separately at %1$s.</string>
     <!-- analytics -->
     <string name="settings_analytics">Analytics</string>
     <string name="settings_opt_in_of_analytics">Send analytics data</string>
@@ -1119,9 +1121,8 @@
 
     <string name="account_email_validation_message">Please check your email and click on the link it contains. Once this is done, click continue.</string>
     <string name="account_email_already_used_error">This email address is already in use.</string>
-    <string name="account_phone_number_already_used_error" tools:ignore="ExtraTranslation">This phone number is already in use.</string>
+    <string name="account_phone_number_already_used_error">This phone number is already in use.</string>
     <string name="account_phone_number_already_used_err" tools:ignore="ExtraTranslation">This phone number is already in use.</string>
-
 
     <string name="settings_password">Password</string>
     <string name="settings_change_password">Change password</string>
@@ -1422,7 +1423,6 @@
     <string name="key_share_request">Key Share Request</string>
     <!-- Keep the label as small as possible-->
     <string name="ignore_request_short_label">Block</string>
-
     <!-- slash commands -->
     <string name="command_error">Command error</string>
     <string name="unrecognized_command">Unrecognized command: %s</string>
@@ -1705,7 +1705,6 @@
     <string name="create_new_room">Create New Room</string>
     <string name="create_new_space">Create New Space</string>
     <string name="error_no_network">No network. Please check your Internet connection.</string>
-    <!-- TODO delete -->
     <string name="error_check_network" tools:ignore="UnusedResources">Something went wrong. Please check your network connection and try again.</string>
     <string name="change_room_directory_network">"Change network"</string>
     <string name="please_wait">"Please wait…"</string>
@@ -1829,6 +1828,8 @@
     <string name="add_by_qr_code">Add by QR code</string>
     <string name="qr_code">QR code</string>
     <string name="creating_direct_room">"Creating room…"</string>
+    <string name="direct_room_user_list_only_invite_one_email">You can only invite one email at a time</string>
+
     <string name="direct_room_user_list_known_title">Known Users</string>
     <string name="direct_room_user_list_suggestions_title">Suggestions</string>
 
@@ -1871,8 +1872,7 @@
     <string name="settings_discovery_please_enter_server">Please enter the identity server url</string>
     <string name="settings_discovery_no_terms_title">Identity server has no terms of services</string>
     <string name="settings_discovery_no_terms">The identity server you have chosen does not have any terms of services. Only continue if you trust the owner of the service</string>
-    <string name="settings_text_message_sent">A text message has been sent to %s. Please
-        enter the verification code it contains.</string>
+    <string name="settings_text_message_sent">A text message has been sent to %s. Please enter the verification code it contains.</string>
     <string name="settings_text_message_sent_hint">Code</string>
     <string name="settings_text_message_sent_wrong_code">The verification code is not correct.</string>
 
@@ -1944,9 +1944,9 @@
     <string name="block_user">"BLOCK USER"</string>
 
     <string name="content_reported_title">"Content reported"</string>
-    <string name="content_reported_content">"This content was reported.\n\nIf you don't want to see any more content from this user, you can block them to hide their messages."</string>
+    <string name="content_reported_content">"This content was reported.\n\nIf you don't want to see any more content from this user, you can ignore them to hide their messages."</string>
     <string name="content_reported_as_spam_title">"Reported as spam"</string>
-    <string name="content_reported_as_spam_content">"This content was reported as spam.\n\nIf you don't want to see any more content from this user, you can block them to hide their messages."</string>
+    <string name="content_reported_as_spam_content">"This content was reported as spam.\n\nIf you don't want to see any more content from this user, you can ignore them to hide their messages."</string>
     <string name="content_reported_as_inappropriate_title">"Reported as inappropriate"</string>
     <string name="content_reported_as_inappropriate_content">"This content was reported as inappropriate.\n\nIf you don't want to see any more content from this user, you can ignore them to hide their messages."</string>
 
@@ -1994,7 +1994,6 @@
     <string name="ftue_auth_carousel_control_body">Use business tools to make yourself known to a multi-million audience. Targeted banner ads will tell a lot about your business.</string>
     <string name="ftue_auth_carousel_encrypted_body">End to end encrypted messaging, all of you are need its a number.</string>
     <string name="storage5g">Use cloud storage up to 5GB to avoid using your phones internal memory. It is possible to send the necessary files directly to the recipients cloud storage with double encryption..</string>
-
     <!-- Note to translators: the translation MUST contain the string "${app_name}", which will be replaced by the application name -->
     <string name="ftue_auth_carousel_workplace_body">${app_name} is also great for the workplace. It’s trusted by the world’s most secure organisations.</string>
 
@@ -2015,9 +2014,7 @@
     <string name="ftue_account_created_subtitle">Your account %s has been created</string>
 
     <string name="ftue_auth_create_account_title">Create account</string>
-    <string name="ftue_auth_create_account_title1">Put login in English. Example: Bek76</string>
-
-    <!-- Note for translators, %s is the full matrix of the account being created, eg @hello:matrix.org -->
+    <string name="ftue_auth_create_account_title1">Put login in English. Example: Bek76</string>    <!-- Note for translators, %s is the full matrix of the account being created, eg @hello:matrix.org -->
     <string name="ftue_auth_create_account_username_entry_footer">Others can discover you %s</string>
     <string name="ftue_auth_create_account_password_entry_footer">Must be 8 characters or more</string>
     <string name="ftue_auth_create_account_choose_server_header">Where your conversations will live</string>
@@ -2265,6 +2262,8 @@
     <string name="settings_rageshake_detection_threshold_summary">Shake your phone to test the detection threshold</string>
     <string name="rageshake_detected">Shake detected!</string>
     <string name="settings">Settings</string>
+    <string name="give_an_add">Give an add</string>
+    <string name="oblachka">Cloud storage</string>
     <string name="devices_current_device">Current session</string>
     <string name="devices_other_devices">Other sessions</string>
 
@@ -2318,6 +2317,7 @@
     <string name="sent_verification_conclusion">Verification Conclusion</string>
     <string name="sent_location">Shared their location</string>
     <string name="sent_live_location">Shared their live location</string>
+
     <string name="verification_request_waiting">Waiting…</string>
     <string name="verification_request_other_cancelled">%s canceled</string>
     <string name="verification_request_you_cancelled">You canceled</string>
@@ -2577,6 +2577,8 @@
     <string name="encryption_enabled_tile_description">Messages in this room are end-to-end encrypted. Learn more &amp; verify users in their profile.</string>
     <string name="direct_room_encryption_enabled_tile_description">Messages in this chat are end-to-end encrypted.</string>
     <string name="direct_room_encryption_enabled_tile_description_future">Messages in this chat will be end-to-end encrypted.</string>
+    <string name="direct_room_encryption_enabled_waiting_users">Waiting for users to join ${app_name}</string>
+    <string name="direct_room_encryption_enabled_waiting_users_tile_description">Once invited users have joined ${app_name}, you will be able to chat and the room will be end-to-end encrypted</string>
     <string name="encryption_not_enabled">Encryption not enabled</string>
     <string name="encryption_misconfigured">Encryption is misconfigured</string>
     <string name="encryption_unknown_algorithm_tile_description">The encryption used by this room is not supported</string>
@@ -2788,7 +2790,7 @@
     <string name="crypto_error_withheld_generic">You cannot access this message because the sender purposely did not send the keys</string>
     <string name="notice_crypto_unable_to_decrypt_merged">Waiting for encryption history</string>
 
-    <string name="disclaimer_title">Riot is now Big Star Messenger!</string>
+    <string name="disclaimer_title"> is now Big Star Messenger!</string>
     <string name="disclaimer_content">We’re excited to announce we’ve changed name! Your app is up to date and you’re signed in to your account.</string>
     <string name="disclaimer_negative_button">GOT IT</string>
     <string name="disclaimer_positive_button">LEARN MORE</string>
@@ -3141,6 +3143,8 @@
     <string name="error_voice_broadcast_permission_denied_message">You don’t have the required permissions to start a voice broadcast in this room. Contact a room administrator to upgrade your permissions.</string>
     <string name="error_voice_broadcast_blocked_by_someone_else_message">Someone else is already recording a voice broadcast. Wait for their voice broadcast to end to start a new one.</string>
     <string name="error_voice_broadcast_already_in_progress_message">You are already recording a voice broadcast. Please end your current voice broadcast to start a new one.</string>
+    <string name="error_voice_broadcast_no_connection_recording">Connection error - Recording paused</string>
+    <string name="error_voice_broadcast_unable_to_decrypt">Unable to decrypt this voice broadcast.</string>
     <!-- Examples of usage: 6h 15min 30sec left / 15min 30sec left / 30sec left -->
     <string name="voice_broadcast_recording_time_left">%1$s left</string>
     <string name="stop_voice_broadcast_dialog_title">Stop live broadcasting?</string>
@@ -3212,6 +3216,24 @@
     <string name="open_poll_option_description">Voters see results as soon as they have voted</string>
     <string name="closed_poll_option_title">Closed poll</string>
     <string name="closed_poll_option_description">Results are only revealed when you end the poll</string>
+    <string name="ended_poll_indicator">Ended the poll.</string>
+    <string name="unable_to_decrypt_some_events_in_poll">Due to decryption errors, some votes may not be counted</string>
+    <string name="room_polls_active">Active polls</string>
+    <string name="room_polls_active_no_item">There are no active polls in this room</string>
+    <plurals name="room_polls_active_no_item_for_loaded_period">
+        <item quantity="one">"There are no active polls for the past day.\nLoad more polls to view polls for previous days."</item>
+        <item quantity="other">"There are no active polls for the past %1$d days.\nLoad more polls to view polls for previous days."</item>
+    </plurals>
+    <string name="room_polls_ended">Past polls</string>
+    <string name="room_polls_ended_no_item">There are no past polls in this room</string>
+    <plurals name="room_polls_ended_no_item_for_loaded_period">
+        <item quantity="one">"There are no past polls for the past day.\nLoad more polls to view polls for previous days."</item>
+        <item quantity="other">"There are no past polls for the past %1$d days.\nLoad more polls to view polls for previous days."</item>
+    </plurals>
+    <string name="room_polls_wait_for_display">Displaying polls</string>
+    <string name="room_polls_load_more">Load more polls</string>
+    <string name="room_polls_loading_error">Error fetching polls.</string>
+    <string name="room_poll_details_go_to_timeline">View poll in timeline</string>
 
     <!-- Location -->
     <string name="location_activity_title_static_sharing">Share location</string>
@@ -3507,6 +3529,13 @@
     <string name="rich_text_editor_format_strikethrough">Apply strikethrough format</string>
     <string name="rich_text_editor_format_underline">Apply underline format</string>
     <string name="rich_text_editor_link">Set link</string>
+    <string name="rich_text_editor_numbered_list">Toggle numbered list</string>
+    <string name="rich_text_editor_bullet_list">Toggle bullet list</string>
+    <string name="rich_text_editor_indent">Indent</string>
+    <string name="rich_text_editor_unindent">Unindent</string>
+    <string name="rich_text_editor_quote">Toggle quote</string>
+    <string name="rich_text_editor_inline_code">Apply inline code format</string>
+    <string name="rich_text_editor_code_block">Toggle code block</string>
     <string name="rich_text_editor_full_screen_toggle">Toggle full screen mode</string>
 
     <string name="set_link_text">Text</string>
@@ -3524,6 +3553,15 @@
     <string name="message_reply_to_sender_sent_sticker">sent a sticker.</string>
     <string name="message_reply_to_sender_created_poll">created a poll.</string>
 
+    <string name="settings_access_token">Access Token</string>
+    <string name="settings_access_token_summary">Your access token gives full access to your account. Do not share it with anyone.</string>
+
+    <!-- Pills -->
+    <string name="pill_message_from_user">Message from %s</string>
+    <string name="pill_message_from_unknown_user">Message</string>
+    <string name="pill_message_in_room">Message in %s</string>
+    <string name="pill_message_in_unknown_room">Message in room</string>
+    <string name="pill_message_unknown_room_or_space">Room/Space</string>
     <!--    Ad cabinet-->
     <string name="views">Views: </string>
     <string name="follows">Follows: </string>
@@ -3551,6 +3589,7 @@
     <string name="ad_links">Links</string>
     <string name="youtube_com_example">youtube.com/example</string>
     <string name="instagram_kz_example">instagram.kz/example</string>
+    <string name="phone_example">Phone number</string>
     <string name="website_kz_example">website.kz/example</string>
     <string name="ad_time_for_ad">Display time</string>
     <string name="ddmmyyyy">dd.mm.yyyy</string>
@@ -3565,26 +3604,7 @@
     <string name="error_voice_message_broadcast_in_progress">Cannot start voice message</string>
     <string name="error_voice_message_broadcast_in_progress_message">You can’t start a voice message as you are currently recording a live broadcast. Please end your live broadcast in order to start recording a voice message</string>
     <string name="error_voice_broadcast_unable_to_play">Unable to play this voice broadcast.</string>
-    <string name="error_voice_broadcast_no_connection_recording">Connection error - Recording paused</string>
-    <string name="ended_poll_indicator">Ended the poll.</string>
-    <string name="unable_to_decrypt_some_events_in_poll">Due to decryption errors, some votes may not be counted</string>
-    <string name="room_polls_active">Active polls</string>
-    <string name="room_polls_active_no_item">There are no active polls in this room</string>
-    <plurals name="room_polls_active_no_item_for_loaded_period">
-        <item quantity="one">"There are no active polls for the past day.\nLoad more polls to view polls for previous days."</item>
-        <item quantity="other">"There are no active polls for the past %1$d days.\nLoad more polls to view polls for previous days."</item>
-    </plurals>
-    <string name="room_polls_ended">Past polls</string>
-    <string name="room_polls_ended_no_item">There are no past polls in this room</string>
-    <plurals name="room_polls_ended_no_item_for_loaded_period">
-        <item quantity="one">"There are no past polls for the past day.\nLoad more polls to view polls for previous days."</item>
-        <item quantity="other">"There are no past polls for the past %1$d days.\nLoad more polls to view polls for previous days."</item>
-    </plurals>
-    <string name="room_polls_wait_for_display">Displaying polls</string>
-    <string name="room_polls_load_more">Load more polls</string>
-    <string name="room_polls_loading_error">Error fetching polls.</string>
-    <string name="rich_text_editor_numbered_list">Toggle numbered list</string>
-    <string name="rich_text_editor_bullet_list">Toggle bullet list</string>
-    <string name="rich_text_editor_inline_code">Apply inline code format</string>
+
+<string name="settings_acceptable_use_policy">...</string>
 
 </resources>

@@ -40,6 +40,15 @@
         android:title="Do an optimized init sync"
         tools:ignore="HardcodedText"
         app:showAsAction="never" />
+    <item3
+        android:id="@+id/podat_reklamu"
+        android:title="Give an add"
+        tools:ignore="HardcodedText" />
+
+    <item
+        android:id="@+id/oblachka"
+        android:title="@string/oblachka"
+        tools:ignore="HardcodedText" />
 
     <item
         android:id="@+id/menu_home_filter"

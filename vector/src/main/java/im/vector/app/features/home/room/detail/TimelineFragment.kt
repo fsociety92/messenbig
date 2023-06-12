@@ -47,12 +47,15 @@ import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.core.view.updatePadding
 import androidx.fragment.app.setFragmentResultListener
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.transition.TransitionManager
 import com.airbnb.epoxy.EpoxyModel
+import com.airbnb.epoxy.EpoxyVisibilityTracker
 import com.airbnb.epoxy.OnModelBuildFinishedListener
 import com.airbnb.epoxy.addGlidePreloader
 import com.airbnb.epoxy.glidePreloader
@@ -76,7 +79,6 @@ import im.vector.app.core.extensions.filterDirectionOverrides
 import im.vector.app.core.extensions.hideKeyboard
 import im.vector.app.core.extensions.registerStartForActivityResult
 import im.vector.app.core.extensions.setTextOrHide
-import im.vector.app.core.extensions.trackItemsVisibilityChange
 import im.vector.app.core.glide.GlideApp
 import im.vector.app.core.glide.GlideRequests
 import im.vector.app.core.intent.getFilenameFromUri
@@ -86,7 +88,6 @@ import im.vector.app.core.platform.VectorMenuProvider
 import im.vector.app.core.platform.showOptimizedSnackbar
 import im.vector.app.core.resources.ColorProvider
 import im.vector.app.core.resources.UserPreferencesProvider
-import im.vector.app.core.time.Clock
 import im.vector.app.core.ui.views.CurrentCallsView
 import im.vector.app.core.ui.views.CurrentCallsViewPresenter
 import im.vector.app.core.ui.views.FailedMessagesWarningView
@@ -138,7 +139,6 @@ import im.vector.app.features.home.room.detail.composer.MessageComposerViewModel
 import im.vector.app.features.home.room.detail.composer.boolean
 import im.vector.app.features.home.room.detail.composer.voice.VoiceRecorderFragment
 import im.vector.app.features.home.room.detail.error.RoomNotFound
-import im.vector.app.features.home.room.detail.readreceipts.DisplayReadReceiptsBottomSheet
 import im.vector.app.features.home.room.detail.timeline.TimelineEventController
 import im.vector.app.features.home.room.detail.timeline.action.EventSharedAction
 import im.vector.app.features.home.room.detail.timeline.action.MessageActionsBottomSheet
@@ -155,6 +155,7 @@ import im.vector.app.features.home.room.detail.timeline.item.MessageTextItem
 import im.vector.app.features.home.room.detail.timeline.item.MessageVoiceItem
 import im.vector.app.features.home.room.detail.timeline.item.ReadReceiptData
 import im.vector.app.features.home.room.detail.timeline.reactions.ViewReactionsBottomSheet
+import im.vector.app.features.home.room.detail.timeline.readreceipts.DisplayReadReceiptsBottomSheet
 import im.vector.app.features.home.room.detail.timeline.url.PreviewUrlRetriever
 import im.vector.app.features.home.room.detail.upgrade.MigrateRoomBottomSheet
 import im.vector.app.features.home.room.detail.views.RoomDetailLazyLoadedViews
@@ -162,7 +163,6 @@ import im.vector.app.features.home.room.detail.widget.RoomWidgetsBottomSheet
 import im.vector.app.features.home.room.threads.ThreadsManager
 import im.vector.app.features.home.room.threads.arguments.ThreadTimelineArgs
 import im.vector.app.features.html.EventHtmlRenderer
-import im.vector.app.features.html.PillsPostProcessor
 import im.vector.app.features.invite.VectorInviteView
 import im.vector.app.features.location.LocationSharingMode
 import im.vector.app.features.location.toLocationData
@@ -186,6 +186,7 @@ import im.vector.app.features.widgets.WidgetActivity
 import im.vector.app.features.widgets.WidgetArgs
 import im.vector.app.features.widgets.WidgetKind
 import im.vector.app.features.widgets.permissions.RoomWidgetPermissionBottomSheet
+import im.vector.lib.core.utils.timer.Clock
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -246,7 +247,6 @@ class TimelineFragment :
     @Inject lateinit var matrixItemColorProvider: MatrixItemColorProvider
     @Inject lateinit var imageContentRenderer: ImageContentRenderer
     @Inject lateinit var roomDetailPendingActionStore: RoomDetailPendingActionStore
-    @Inject lateinit var pillsPostProcessorFactory: PillsPostProcessor.Factory
     @Inject lateinit var callManager: WebRtcCallManager
     @Inject lateinit var audioMessagePlaybackTracker: AudioMessagePlaybackTracker
     @Inject lateinit var shareIntentHandler: ShareIntentHandler
@@ -266,6 +266,7 @@ class TimelineFragment :
     private val timelineViewModel: TimelineViewModel by fragmentViewModel()
     private val messageComposerViewModel: MessageComposerViewModel by fragmentViewModel()
     private val debouncer = Debouncer(createUIHandler())
+    private val itemVisibilityTracker = EpoxyVisibilityTracker()
 
     private lateinit var scrollOnNewMessageCallback: ScrollOnNewMessageCallback
     private lateinit var scrollOnHighlightedEventCallback: ScrollOnHighlightedEventCallback
@@ -748,7 +749,9 @@ class TimelineFragment :
     }
 
     private fun navigateToEvent(action: RoomDetailViewEvents.NavigateToEvent) {
-        val scrollPosition = timelineEventController.searchPositionOfEvent(action.eventId)
+        val scrollPosition = timelineEventController.getPositionOfReadMarker().takeIf { action.isFirstUnreadEvent }
+                ?: timelineEventController.searchPositionOfEvent(action.eventId)
+
         if (scrollPosition == null) {
             scrollOnHighlightedEventCallback.scheduleScrollTo(action.eventId)
         } else {
@@ -983,11 +986,11 @@ class TimelineFragment :
 
     override fun onResume() {
         super.onResume()
+        itemVisibilityTracker.attach(views.timelineRecyclerView)
         notificationDrawerManager.setCurrentRoom(timelineArgs.roomId)
         notificationDrawerManager.setCurrentThread(timelineArgs.threadTimelineArgs?.rootThreadEventId)
         roomDetailPendingActionStore.data?.let { handlePendingAction(it) }
         roomDetailPendingActionStore.data = null
-        views.timelineRecyclerView.adapter = timelineEventController.adapter
     }
 
     private fun handlePendingAction(roomDetailPendingAction: RoomDetailPendingAction) {
@@ -1004,9 +1007,9 @@ class TimelineFragment :
 
     override fun onPause() {
         super.onPause()
+        itemVisibilityTracker.detach(views.timelineRecyclerView)
         notificationDrawerManager.setCurrentRoom(null)
         notificationDrawerManager.setCurrentThread(null)
-        views.timelineRecyclerView.adapter = null
     }
 
     private val emojiActivityResultLauncher = registerStartForActivityResult { activityResult ->
@@ -1049,7 +1052,6 @@ class TimelineFragment :
         timelineEventController.callback = this
         timelineEventController.timeline = timelineViewModel.timeline
 
-        views.timelineRecyclerView.trackItemsVisibilityChange()
         layoutManager = object : LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, true) {
             override fun onLayoutCompleted(state: RecyclerView.State) {
                 super.onLayoutCompleted(state)
@@ -1072,6 +1074,7 @@ class TimelineFragment :
             it.dispatchTo(scrollOnHighlightedEventCallback)
         }
         timelineEventController.addModelBuildListener(modelBuildListener)
+        views.timelineRecyclerView.adapter = timelineEventController.adapter
 
         if (vectorPreferences.swipeToReplyIsEnabled()) {
             val quickReplyHandler = object : RoomMessageTouchHelperCallback.QuickReplayHandler {
@@ -1119,29 +1122,31 @@ class TimelineFragment :
 
     private fun updateJumpToReadMarkerViewVisibility() {
         if (isThreadTimeLine()) return
-        viewLifecycleOwner.lifecycleScope.launchWhenResumed {
-            val state = timelineViewModel.awaitState()
-            val showJumpToUnreadBanner = when (state.unreadState) {
-                UnreadState.Unknown,
-                UnreadState.HasNoUnread -> false
-                is UnreadState.ReadMarkerNotLoaded -> true
-                is UnreadState.HasUnread -> {
-                    if (state.canShowJumpToReadMarker) {
-                        val lastVisibleItem = layoutManager.findLastCompletelyVisibleItemPosition()
-                        val positionOfReadMarker = withContext(Dispatchers.Default) {
-                            timelineEventController.getPositionOfReadMarker()
-                        }
-                        if (positionOfReadMarker == null) {
-                            false
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
+                val state = timelineViewModel.awaitState()
+                val showJumpToUnreadBanner = when (state.unreadState) {
+                    UnreadState.Unknown,
+                    UnreadState.HasNoUnread -> false
+                    is UnreadState.ReadMarkerNotLoaded -> true
+                    is UnreadState.HasUnread -> {
+                        if (state.canShowJumpToReadMarker) {
+                            val lastVisibleItem = layoutManager.findLastCompletelyVisibleItemPosition()
+                            val positionOfReadMarker = withContext(Dispatchers.Default) {
+                                timelineEventController.getPositionOfReadMarker()
+                            }
+                            if (positionOfReadMarker == null) {
+                                false
+                            } else {
+                                positionOfReadMarker > lastVisibleItem
+                            }
                         } else {
-                            positionOfReadMarker > lastVisibleItem
+                            false
                         }
-                    } else {
-                        false
                     }
                 }
+                views.jumpToReadMarkerView.isVisible = showJumpToUnreadBanner
             }
-            views.jumpToReadMarkerView.isVisible = showJumpToUnreadBanner
         }
     }
 
@@ -1185,6 +1190,10 @@ class TimelineFragment :
             } else {
                 views.hideComposerViews()
                 views.notificationAreaView.render(NotificationAreaView.State.Tombstone(mainState.tombstoneEvent))
+            }
+
+            if (summary.isDirect && summary.isEncrypted && summary.joinedMembersCount == 1 && summary.invitedMembersCount == 0) {
+                views.hideComposerViews()
             }
         } else if (summary?.membership == Membership.INVITE && inviter != null) {
             views.hideComposerViews()
@@ -1627,14 +1636,16 @@ class TimelineFragment :
     }
 
     override fun onRoomCreateLinkClicked(url: String) {
-        viewLifecycleOwner.lifecycleScope.launchWhenResumed {
-            permalinkHandler
-                    .launch(requireActivity(), url, object : NavigationInterceptor {
-                        override fun navToRoom(roomId: String?, eventId: String?, deepLink: Uri?, rootThreadEventId: String?): Boolean {
-                            requireActivity().finish()
-                            return false
-                        }
-                    })
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
+                permalinkHandler
+                        .launch(requireActivity(), url, object : NavigationInterceptor {
+                            override fun navToRoom(roomId: String?, eventId: String?, deepLink: Uri?, rootThreadEventId: String?): Boolean {
+                                requireActivity().finish()
+                                return false
+                            }
+                        })
+            }
         }
     }
 
@@ -1997,10 +2008,10 @@ class TimelineFragment :
 
     private fun onJumpToReadMarkerClicked() = withState(timelineViewModel) {
         if (it.unreadState is UnreadState.HasUnread) {
-            timelineViewModel.handle(RoomDetailAction.NavigateToEvent(it.unreadState.firstUnreadEventId, false))
+            timelineViewModel.handle(RoomDetailAction.NavigateToEvent(it.unreadState.firstUnreadEventId, highlight = false, isFirstUnreadEvent = true))
         }
         if (it.unreadState is UnreadState.ReadMarkerNotLoaded) {
-            timelineViewModel.handle(RoomDetailAction.NavigateToEvent(it.unreadState.readMarkerId, false))
+            timelineViewModel.handle(RoomDetailAction.NavigateToEvent(it.unreadState.readMarkerId, highlight = false))
         }
     }
 

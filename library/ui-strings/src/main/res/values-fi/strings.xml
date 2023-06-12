@@ -88,8 +88,8 @@
     <string name="notice_room_unban_with_reason_by_you">Peruutit eston %1$s. Syy: %2$s</string>
     <string name="notice_room_remove_with_reason_by_you">Poistit käyttäjän %1$s. Syy: %2$s</string>
     <string name="notice_room_reject_with_reason_by_you">Hylkäsit kutsun. Syy: %1$s</string>
-    <string name="notice_direct_room_leave_with_reason_by_you">Lähdit. Syy: %1$s</string>
-    <string name="notice_direct_room_leave_with_reason">%1$s lähti. Syy: %2$s</string>
+    <string name="notice_direct_room_leave_with_reason_by_you">Poistuit. Syy: %1$s</string>
+    <string name="notice_direct_room_leave_with_reason">%1$s poistui. Syy: %2$s</string>
     <string name="notice_room_leave_with_reason_by_you">Poistuit huoneesta. Syy: %1$s</string>
     <string name="notice_direct_room_join_with_reason_by_you">Liityit. Syy: %1$s</string>
     <string name="notice_direct_room_join_with_reason">%1$s liittyi. Syy: %2$s</string>
@@ -139,9 +139,9 @@
     <string name="notice_direct_room_update_by_you">Päivitit tässä.</string>
     <string name="notice_direct_room_update">%s päivitti täällä.</string>
     <string name="notice_room_update_by_you">Päivitit tämän huoneen.</string>
-    <string name="notice_made_future_direct_room_visibility_by_you">Teit tulevista viesteistä näkyviä käyttäjälle %1$s</string>
-    <string name="notice_made_future_direct_room_visibility">%1$s teki tulevista viesteistä näkyviä käyttäjälle %2$s</string>
-    <string name="notice_made_future_room_visibility_by_you">Teit tulevan huonehistorian näkyväksi %1$s</string>
+    <string name="notice_made_future_direct_room_visibility_by_you">Teit tulevista viesteistä näkyviä seuraaville: %1$s</string>
+    <string name="notice_made_future_direct_room_visibility">%1$s teki tulevista viesteistä näkyviä seuraaville: %2$s</string>
+    <string name="notice_made_future_room_visibility_by_you">Teit tulevan huonehistorian näkyväksi seuraaville: %1$s</string>
     <string name="notice_ended_call_by_you">Lopetit puhelun.</string>
     <string name="notice_answered_call_by_you">Vastasit puheluun.</string>
     <string name="notice_call_candidates_by_you">Lähetit tietoja puhelun valmistelemiseksi.</string>
@@ -168,7 +168,7 @@
     <string name="notice_direct_room_join_by_you">Liityit</string>
     <string name="notice_direct_room_join">%1$s liittyi</string>
     <string name="notice_room_join_by_you">Liityit huoneeseen</string>
-    <string name="notice_room_invite_by_you">Kutsuit %1$s</string>
+    <string name="notice_room_invite_by_you">Kutsuit käyttäjän %1$s</string>
     <string name="notice_direct_room_created_by_you">Loit keskustelun</string>
     <string name="notice_direct_room_created">%1$s loi keskustelun</string>
     <string name="notice_room_created_by_you">Loit huoneen</string>
@@ -252,7 +252,7 @@
     <string name="incoming_video_call">Saapuva videopuhelu</string>
     <string name="incoming_voice_call">Saapuva puhelu</string>
     <string name="call_in_progress">Puhelu käynnissä…</string>
-    <string name="call_error_user_not_responding">Toinen puoli ei vastannut.</string>
+    <string name="call_error_user_not_responding">Toinen osapuoli ei vastannut.</string>
     <string name="permissions_rationale_popup_title">Huomio</string>
     <string name="permissions_rationale_msg_record_audio">${app_name} tarvitsee käyttöluvan mikrofoniin suorittakseen puheluita.</string>
     <string name="permissions_rationale_msg_camera_and_audio">${app_name} tarvitsee käyttöluvan kameraan ja mikrofoniin suorittakseen videopuheluita.
@@ -887,7 +887,7 @@
     <string name="settings_discovery_disconnect_with_bound_pid">Jaat sähköpostiosoitteita tai puhelinnumeroita identiteettipalvelimella %1$s. Sinun täytyy yhdistää uudelleen palvelimeen %2$s, jotta voit lopettaa niiden jakamisen.</string>
     <string name="settings_agree_to_terms">Hyväksy identiteettipalvelimen (%s) käyttöehdot salliaksesi, että sinut voi löytää sähköpostiosoitteen tai puhelinnumeron perusteella.</string>
     <string name="settings_discovery_disconnect_identity_server_info">Yhteyden katkaiseminen identiteettipalvelimeesi tarkoittaa, että muut käyttäjät eivät voi etsiä sinua etkä voi kutsua muita sähköpostin tai puhelinnumeron perusteella.</string>
-    <string name="settings_discovery_confirm_mail">Lähetimme sinulle vahvistussähköpostin osoitteeseen %s, tarkista sähköpostisi ja klikkaa vahvistuslinkkiä</string>
+    <string name="settings_discovery_confirm_mail">Lähetimme sinulle sähköpostia osoitteeseen %s. Tarkista sähköpostisi ja klikkaa vahvistuslinkkiä.</string>
     <string name="labs_allow_extended_logging">Ota yksityiskohtaiset lokit käyttöön.</string>
     <string name="error_terms_not_accepted">Yritä uudelleen, kun olet hyväksynyt kotipalvelimesi käyttöehdot.</string>
     <string name="error_network_timeout">Palvelimen vastaus näyttäisi olevan liian hidas. Tämä voi johtua kehnosta yhteydestä tai palvelimella olevasta ongelmasta. Yritä hetken kuluttua uudelleen.</string>
@@ -1026,7 +1026,7 @@
     <string name="login_signin_to">Kirjaudu sisään palvelimeen %1$s</string>
     <string name="login_signup">Rekisteröidy</string>
     <string name="login_signin">Kirjaudu sisään</string>
-    <string name="login_signin_sso">Jatka kertakirjautumiseen</string>
+    <string name="login_signin_sso">Jatka kertakirjautumisella</string>
     <string name="login_server_url_form_modular_hint">Element Matrix Services in osoite</string>
     <string name="login_server_url_form_other_hint">Osoite</string>
     <string name="login_server_url_form_modular_text">Korkealuokkaista isännöintiä organisaatioille</string>
@@ -1097,8 +1097,8 @@
     <string name="login_validation_code_is_not_correct">Syöttämäsi koodi ei ole kelvollinen. Tarkista se.</string>
     <string name="login_error_outdated_homeserver_title">Vanhentunut kotipalvelin</string>
     <plurals name="login_error_limit_exceeded_retry_after">
-        <item quantity="one">Liian monta pyyntöä lähetettiin. Voit yrittää uudelleen 1 sekunnissa…</item>
-        <item quantity="other">Liian monta pyyntöä lähetettiin. Voit yrittää uudelleen %1$d sekunnissa…</item>
+        <item quantity="one">Liian monta pyyntöä lähetettiin. Voit yrittää uudelleen sekunnin kuluttua…</item>
+        <item quantity="other">Liian monta pyyntöä lähetettiin. Voit yrittää uudelleen %1$d sekunnin kuluttua…</item>
     </plurals>
     <string name="seen_by">Nähneet</string>
     <string name="signed_out_title">Olet kirjautunut ulos</string>
@@ -1311,7 +1311,7 @@
     <string name="permissions_denied_qr_code">QR-koodin skannaaminen vaatii luvan kameran käyttöön.</string>
     <string name="settings_call_show_confirmation_dialog_summary">Kysy varmistusta ennen puhelun aloittamista</string>
     <string name="settings_call_show_confirmation_dialog_title">Estä vahinkopuhelut</string>
-    <string name="login_error_ssl_other">SSL Virhe.</string>
+    <string name="login_error_ssl_other">SSL-virhe.</string>
     <string name="call_camera_back">Takakamera</string>
     <string name="call_camera_front">Etukamera</string>
     <string name="call_switch_camera">Vaihda kameraa</string>
@@ -2068,7 +2068,7 @@
     <string name="ftue_account_created_congratulations_title">Onnittelut!</string>
     <string name="ftue_account_created_personalize">Personoi profiili</string>
     <string name="ftue_auth_use_case_skip_partial">ohittaa tämän kysymyksen</string>
-    <string name="ftue_auth_use_case_skip">Ei varmuutta vielä\? Voit %s</string>
+    <string name="ftue_auth_use_case_skip">Etkö ole vielä varma\? Voit %s</string>
     <string name="settings_discovery_no_policy_provided">Identiteettipalvelin ei tarjoa käytäntöä</string>
     <string name="settings_discovery_hide_identity_server_policy_title">Piilota identiteettipalvelimen käytäntö</string>
     <string name="settings_discovery_show_identity_server_policy_title">Näytä identiteettipalvelimen käytäntö</string>
@@ -2119,8 +2119,8 @@
     <string name="device_manager_other_sessions_recommendation_title_verified">Vahvistetu</string>
     <string name="a11y_device_manager_filter">Suodata</string>
     <plurals name="device_manager_filter_option_inactive_description">
-        <item quantity="one">Käyttämättä %1$d päivän tai pidempään</item>
-        <item quantity="other">Käyttämättä %1$d päivää tai pidempään</item>
+        <item quantity="one">Käyttämättä vuorokauden tai pidempään</item>
+        <item quantity="other">Käyttämättä %1$d vuorokautta tai pidempään</item>
     </plurals>
     <string name="device_manager_filter_option_inactive">Käyttämätön</string>
     <string name="device_manager_filter_option_unverified_description">Ei valmis turvallista viestintää varten</string>
@@ -2136,7 +2136,7 @@
     <string name="device_manager_inactive_sessions_title">Käyttämättä olevat istunnot</string>
     <string name="device_manager_unverified_sessions_description">Vahvista nämä istunnot tai kirjaudu niistä ulos.</string>
     <string name="device_manager_unverified_sessions_title">Vahvistamattomat istunnot</string>
-    <string name="device_manager_header_section_security_recommendations_description">Paranna tilisi turvallisuutta seuraamalla näitä suosituksia.</string>
+    <string name="device_manager_header_section_security_recommendations_description">Paranna tilisi turvallisuutta noudattamalla näitä suosituksia.</string>
     <string name="device_manager_header_section_security_recommendations_title">Turvallisuussuositukset</string>
     <plurals name="device_manager_other_sessions_description_inactive">
         <item quantity="one">Käyttämättä %1$d+ päivän (%2$s)</item>
@@ -2164,8 +2164,8 @@
     <string name="settings_troubleshoot_test_current_distributor">Tällä hetkellä käytössä %s.</string>
     <string name="settings_troubleshoot_test_current_distributor_title">Menetelmä</string>
     <plurals name="settings_troubleshoot_test_distributors_many">
-        <item quantity="one">Löytyi %d menetelmä.</item>
-        <item quantity="other">Löytyi %d menetelmää.</item>
+        <item quantity="one">Yksi menetelmä löytyi.</item>
+        <item quantity="other">%d menetelmää löytyi.</item>
     </plurals>
     <string name="settings_troubleshoot_test_distributors_title">Saatavilla olevat menetelmät</string>
     <string name="settings_notification_method">Ilmoitusmenetelmä</string>
@@ -2307,4 +2307,126 @@
         <item quantity="one">%1$d valittu</item>
         <item quantity="other">%1$d valittu</item>
     </plurals>
+    <string name="voice_broadcast_buffering">Puskuroidaan…</string>
+    <string name="error_voice_message_broadcast_in_progress">Ääniviestiä ei voi aloittaa</string>
+    <string name="room_using_unstable_room_version">Tässä huoneessa on käytössä huoneversio %s, jonka tämä kotipalvelin on merkinnyt epävakaaksi.</string>
+    <string name="space_leave_radio_button_none">Älä poistu mistään</string>
+    <string name="space_leave_radio_button_all">Poistu kaikista</string>
+    <string name="a11y_delete_avatar">Poista profiilikuva</string>
+    <string name="a11y_change_avatar">Vaihda profiilikuva</string>
+    <string name="call_dial_pad_lookup_error">Puhelinnumeron haussa tapahtui virhe</string>
+    <plurals name="invitations_sent_to_one_and_more_users">
+        <item quantity="one">Kutsut lähetetty käyttäjälle %1$s ja yhdelle muulle</item>
+        <item quantity="other">Kutsut lähetetty käyttäjälle %1$s ja %2$d muulle</item>
+    </plurals>
+    <string name="invitations_sent_to_two_users">Kutsu lähetetty käyttäjille %1$s ja %2$s</string>
+    <string name="invitation_sent_to_one_user">Kutsu lähetetty käyttäjälle %1$s</string>
+    <string name="send_your_first_msg_to_invite">Kutsu %s keskusteluun lähettämällä ensimmäinen viesti</string>
+    <string name="this_is_the_beginning_of_dm">Tästä alkaa yksityisviestihistoriasi sinun ja käyttäjän %s välillä.</string>
+    <string name="this_is_the_beginning_of_room">%s alkaa tästä.</string>
+    <string name="encryption_misconfigured">Salaus on säädetty väärin</string>
+    <string name="encryption_has_been_misconfigured">Salaus on säädetty väärin.</string>
+    <string name="login_error_outdated_homeserver_warning_content">Tällä kotipalvelimella on vanha versio. Pyydä kotipalvelimesi ylläpitäjää päivittämään se. Voit jatkaa, mutta jotkin ominaisuudet eivät välttämättä toimi oikein.</string>
+    <string name="ftue_auth_choose_server_ems_cta">Ota yhteyttä</string>
+    <string name="login_social_continue_with">Jatka %s-kirjautumisella</string>
+    <string name="ftue_auth_create_account_sso_section_header">tai</string>
+    <string name="ftue_auth_sign_in_choose_server_header">Keskustelujesi koti</string>
+    <string name="ftue_auth_create_account_choose_server_header">Keskustelujesi koti</string>
+    <string name="ftue_auth_use_case_subtitle">Laitetaan yhteydet kuntoon</string>
+    <string name="ftue_auth_use_case_title">Kenen kanssa juttelet eniten\?</string>
+    <string name="ftue_auth_carousel_workplace_body">${app_name} toimii mainiosti työpaikallakin. Siihen luottavat maailman turvallisimmat organisaatiot.</string>
+    <string name="jitsi_leave_conf_to_join_another_one_content">Poistutaanko nykyisestä ryhmäpuhelusta ja vaihdetaan toiseen\?</string>
+    <string name="directory_add_a_new_server_error_already_added">Tämä palvelin on jo luettelossa</string>
+    <string name="directory_add_a_new_server_error">Tätä palvelinta tai sen huoneluetteloa ei löydy</string>
+    <string name="room_settings_room_access_entry_knock">Kuka vain voi koputtaa huoneeseen ja jäsenet voivat sen jälkeen hyväksyä tai hylätä</string>
+    <string name="room_alias_unpublish_confirmation">Poista osoitteen \"%1$s\" julkaiseminen\?</string>
+    <string name="room_settings_room_notifications_encryption_notice">Huomaa, että maininnat ja avainsanailmoitukset eivät ole käytössä salausta käyttävissä huoneissa mobiililaitteilla.</string>
+    <string name="settings_enable_direct_share_title">Ota suora jako käyttöön</string>
+    <string name="settings_autoplay_animated_images_summary">Toista aikajanalla olevat animoidut kuvat heti, kun ne näkyvät</string>
+    <string name="settings_autoplay_animated_images_title">Toista animoidut kuvat automaattisesti</string>
+    <string name="settings_mentions_and_keywords_encryption_notice">Et saa ilmoituksia maininnoista ja avainsanoista salausta käyttävissä huoneissa mobiililaitteilla.</string>
+    <string name="settings_room_upgrades">Huonepäivitykset</string>
+    <string name="settings_messages_by_bot">Botin lähettämät viestit</string>
+    <string name="settings_troubleshoot_test_system_settings_permission_failed">${app_name} tarvitsee luvan ilmoitusten näyttämiseen.
+\nAnna lupa.</string>
+    <string name="room_permissions_upgrade_the_room">Päivitä huone</string>
+    <string name="labs_enable_deferred_dm_title">Ota lykätyt yksityisviestit käyttöön</string>
+    <string name="action_deselect_all">Poista valinta kaikista</string>
+    <string name="action_select_all">Valitse kaikki</string>
+    <string name="denied_permission_voice_message">Anna mikrofonin käyttöoikeus ääniviestien lähettämiseksi.</string>
+    <string name="denied_permission_camera">Anna kameran käyttöoikeus järjestelmän asetuksista tämän toiminnon suorittamiseksi.</string>
+    <string name="denied_permission_generic">Tämän toiminnon suorittaminen vaatii enemmän oikeuksia. Anna oikeudet järjestelmän asetuksista.</string>
+    <string name="notification_listening_for_notifications">Kuunnellaan ilmoituksia</string>
+    <string name="home_empty_no_unreads_message">Lukemattomat viestisi näkyvät tässä sitten kun saat niitä.</string>
+    <string name="home_empty_no_unreads_title">Ei ilmoitettavaa.</string>
+    <string name="device_manager_sessions_sign_in_with_qr_code_title">Kirjaudu QR-koodilla</string>
+    <string name="device_manager_session_rename_warning">Huomaa, että istuntojen nimet näkyvät ihmisille, joiden kanssa viestit.</string>
+    <string name="device_manager_session_rename_edit_hint">Istunnon nimi</string>
+    <string name="device_manager_session_details_device_ip_address">IP-osoite</string>
+    <string name="device_manager_session_details_device_operating_system">Käyttöjärjestelmä</string>
+    <string name="device_manager_session_details_device_model">Malli</string>
+    <string name="device_manager_session_details_device_browser">Selain</string>
+    <string name="device_manager_session_details_application_url">URL-osoite</string>
+    <string name="device_manager_session_details_application_version">Versio</string>
+    <string name="device_manager_session_details_application_name">Nimi</string>
+    <string name="device_manager_session_details_session_name">Istunnon nimi</string>
+    <string name="device_manager_session_overview_signout">Kirjaudu ulos tästä istunnosta</string>
+    <string name="device_manager_other_sessions_hide_ip_address">Piilota IP-osoite</string>
+    <string name="device_manager_other_sessions_show_ip_address">Näytä IP-osoite</string>
+    <string name="device_manager_signout_all_other_sessions">Kirjaudu ulos kaikista muista istunnoista</string>
+    <plurals name="device_manager_other_sessions_multi_signout_all">
+        <item quantity="one">Kirjaudu ulos yhdestä istunnosta</item>
+        <item quantity="other">Kirjaudu ulos %1$d istunnosta</item>
+    </plurals>
+    <string name="device_manager_other_sessions_multi_signout_selection">Kirjaudu ulos</string>
+    <plurals name="device_manager_other_sessions_recommendation_description_inactive">
+        <item quantity="one">Harkitse vanhoista (yksi vuorokausi tai vanhemmista), käyttämättömistä istunnoista uloskirjautumista.</item>
+        <item quantity="other">Harkitse vanhoista (%1$d vuorokautta tai vanhemmista), käyttämättömistä istunnoista uloskirjautumista.</item>
+    </plurals>
+    <plurals name="device_manager_inactive_sessions_description">
+        <item quantity="one">Harkitse vanhoista (yksi vuorokausi tai vanhemmista), käyttämättömistä istunnoista uloskirjautumista.</item>
+        <item quantity="other">Harkitse vanhoista (%1$d vuorokautta tai vanhemmista), käyttämättömistä istunnoista uloskirjautumista.</item>
+    </plurals>
+    <string name="device_manager_verification_status_detail_other_session_verified">Tämä istunto on valmiina turvalliseen viestintään.</string>
+    <string name="device_manager_verification_status_detail_current_session_verified">Nykyinen istuntosi on valmina turvalliseen viestintään.</string>
+    <string name="attachment_type_selector_camera">Kamera</string>
+    <string name="attachment_type_selector_location">Sijainti</string>
+    <string name="attachment_type_selector_poll">Kyselyt</string>
+    <string name="attachment_type_selector_file">Liitteet</string>
+    <string name="attachment_type_selector_sticker">Tarrat</string>
+    <string name="location_share_loading_map_error">Karttaa ei voida ladata
+\nTätä kotipalvelinta ei välttämättä ole säädetty näyttämään karttoja.</string>
+    <string name="room_polls_loading_error">Virhe kyselyjä noudettaessa.</string>
+    <string name="room_polls_load_more">Lataa lisää kyselyjä</string>
+    <plurals name="room_polls_ended_no_item_for_loaded_period">
+        <item quantity="one">Viime vuorokaudelta ei ole menneitä kyselyjä.
+\nLataa lisää kyselyjä nähdäksesi aiempien päivien kyselyt.</item>
+        <item quantity="other">Viimeisiltä %1$d vuorokaudelta ei ole menneitä kyselyjä.
+\nLataa lisää kyselyjä nähdäksesi aiempien päivien kyselyt.</item>
+    </plurals>
+    <string name="room_polls_ended_no_item">Tässä huoneessa ei ole menneitä kyselyjä</string>
+    <string name="room_polls_ended">Menneet kyselyt</string>
+    <plurals name="room_polls_active_no_item_for_loaded_period">
+        <item quantity="one">Ei kyselyjä viimeisen vuorokauden ajalta.
+\nLataa lisää kyselyjä nähdäksesi aiempien päivien kyselyt.</item>
+        <item quantity="other">Ei kyselyjä viimeisen %1$d vuorokauden ajalta.
+\nLataa lisää kyselyjä nähdäksesi aiempien päivien kyselyt.</item>
+    </plurals>
+    <string name="room_polls_active_no_item">Tässä huoneessa ei ole aktiivisia kyselyjä</string>
+    <string name="room_polls_active">Aktiiviset kyselyt</string>
+    <string name="unable_to_decrypt_some_events_in_poll">Salauksen purkamisvirheistä johtuen joitakin ääniä ei ehkä lasketa</string>
+    <string name="end_poll_confirmation_description">Tämä estää ihmisiä äänestämästä ja näyttää kyselyn lopulliset tulokset.</string>
+    <string name="labs_enable_latex_maths">Ota LaTeX-matematiikka käyttöön</string>
+    <string name="voice_broadcast_recording_time_left">%1$s jäljellä</string>
+    <string name="voice_message_release_to_send_toast">Äänitä pitämällä painettuna, lähetä päästämällä</string>
+    <string name="upgrade_room_warning">Huoneen päivittäminen on edistynyt toiminto, jota yleensä suositellaan, kun huone on epävakaa virheistä, puuttuvista ominaisuuksita tai tietoturvahaavoittuvuuksista johtuen.
+\nSe vaikuttaa yleensä vain siihen, miten huonetta käsitellään palvelimella.</string>
+    <string name="space_mark_as_not_suggested">Merkitse ei-ehdotetuksi</string>
+    <string name="space_mark_as_suggested">Merkitse ehdotetuksi</string>
+    <string name="event_status_failed_messages_warning">Viestien lähettäminen epäonnistui</string>
+    <string name="a11y_presence_busy">Varattu</string>
+    <string name="call_transfer_failure">Virhe puhelua siirrettäessä</string>
+    <string name="call_transfer_connect_action">Yhdistä</string>
+    <string name="three_pid_revoke_invite_dialog_title">Kumoa kutsu</string>
+    <string name="error_forbidden_digits_only_username">Kotipalvelin ei hyväksy pelkistä numeroista koostuvaa käyttäjänimeä.</string>
 </resources>

@@ -30,13 +30,16 @@ import androidx.core.view.isVisible
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.airbnb.mvrx.Mavericks
 import com.airbnb.mvrx.viewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import im.vector.app.R
 import im.vector.app.SpaceStateHandler
+import im.vector.app.core.extensions.CabinetActivity
 import im.vector.app.core.extensions.hideKeyboard
 import im.vector.app.core.extensions.registerStartForActivityResult
 import im.vector.app.core.extensions.replaceFragment
@@ -403,8 +406,8 @@ class HomeActivity :
 
     private fun handleStartRecoverySetup() {
         // To avoid IllegalStateException in case the transaction was executed after onSaveInstanceState
-        lifecycleScope.launchWhenResumed {
-            navigator.open4SSetup(this@HomeActivity, SetupMode.NORMAL)
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.RESUMED) { navigator.open4SSetup(this@HomeActivity, SetupMode.NORMAL) }
         }
     }
 
@@ -679,6 +682,10 @@ class HomeActivity :
             }
             R.id.menu_home_qr -> {
                 launchQrCode()
+                true
+            }
+            R.id.podat_reklamu -> {
+                startActivity(Intent(this, CabinetActivity::class.java))
                 true
             }
             else -> false

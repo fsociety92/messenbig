@@ -159,7 +159,7 @@
             style="@style/Widget.Vector.TextInputLayout.Username"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="@string/username"
+            android:text="Username"
             app:layout_constraintBottom_toTopOf="@id/createAccountEntryFooter"
             app:layout_constraintEnd_toEndOf="@id/createAccountGutterEnd"
             app:layout_constraintStart_toStartOf="@id/createAccountGutterStart"
@@ -171,9 +171,10 @@
                 android:layout_height="match_parent"
                 android:imeOptions="actionNext"
                 android:inputType="textNoSuggestions"
+                android:text="Username"
                 android:maxLines="1"
                 android:nextFocusForward="@id/createAccountPasswordInput"
-                tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+                tools:ignore="HardcodedText,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

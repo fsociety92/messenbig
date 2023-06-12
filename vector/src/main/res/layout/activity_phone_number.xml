@@ -36,6 +36,7 @@
                 app:layout_constraintBottom_toTopOf="@id/phoneEntryHeaderIcon"
                 app:layout_constraintTop_toTopOf="parent" />
 
+
             <ImageView
                 android:id="@+id/phoneEntryHeaderIcon"
                 android:layout_width="wrap_content"
@@ -51,6 +52,7 @@
                 app:layout_constraintStart_toStartOf="@id/phoneEntryGutterStart"
                 app:layout_constraintTop_toTopOf="parent"
                 app:tint="@color/palette_white" />
+        
 
             <TextView
                 android:id="@+id/phoneEntryHeaderTitle"
@@ -65,6 +67,7 @@
                 app:layout_constraintEnd_toEndOf="@id/phoneEntryGutterEnd"
                 app:layout_constraintStart_toStartOf="@id/phoneEntryGutterStart"
                 app:layout_constraintTop_toBottomOf="@id/phoneEntryHeaderIcon" />
+
 
             <TextView
                 android:id="@+id/phoneEntryHeaderSubtitle"
@@ -96,6 +99,8 @@
                 app:layout_constraintStart_toStartOf="@id/phoneEntryGutterStart"
                 app:layout_constraintTop_toBottomOf="@id/titleContentSpacing">
 
+
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_phone_number"
                     android:layout_width="match_parent"
@@ -115,6 +120,8 @@
                     tools:layout_editor_absoluteY="85dp" />
 
             </com.google.android.material.textfield.TextInputLayout>
+
+
 
             <Space
                 android:id="@+id/entrySpacing"

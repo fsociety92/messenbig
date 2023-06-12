@@ -50,7 +50,7 @@
             app:layout_constraintEnd_toEndOf="@id/loginGutterEnd"
             app:layout_constraintStart_toStartOf="@id/loginGutterStart"
             app:layout_constraintTop_toBottomOf="@id/headerSpacing"
-            app:tint="@color/palette_white" />
+            app:tint="@color/element_content_primary_dark" />
 
 
         <TextView
@@ -159,25 +159,39 @@
             app:layout_constraintStart_toStartOf="@id/loginGutterStart"
             app:layout_constraintTop_toBottomOf="@id/serverSelectionSpacing">
 
+
+            <com.hbb20.CountryCodePicker
+                android:id="@+id/CountryCodePicker"
+                android:layout_width="117dp"
+                android:layout_height="51dp"
+                app:ccp_arrowColor="@color/element_name_07"
+                app:ccp_contentColor="@color/element_accent_dark"
+                app:ccpDialog_backgroundColor="@color/element_accent_light"
+                app:ccp_flagBorderColor="@color/element_accent_dark"
+                android:layout_marginTop="-50dp"
+                app:ccp_defaultNameCode="Kz" />
+
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/loginEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="0dp"
+                android:layout_width="250dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="120dp"
                 android:layout_marginTop="200dp"
                 android:layout_marginEnd="0dp"
+                android:textColor="@color/element_accent_light"
                 android:ems="10"
-                android:text="+"
                 android:hint="Enter Phone Number"
                 android:inputType="phone"
+                android:nextFocusForward="@id/loginPasswordInput"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="HardcodedText"
-                tools:layout_editor_absoluteY="85dp"
-                android:nextFocusForward="@id/loginPasswordInput" />
+                tools:layout_editor_absoluteY="85dp" />
+
 
         </com.google.android.material.textfield.TextInputLayout>
+
 
         <Space
             android:id="@+id/entrySpacing"

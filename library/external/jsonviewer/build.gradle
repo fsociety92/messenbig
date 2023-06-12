@@ -6,6 +6,7 @@ apply plugin: 'com.google.devtools.ksp'
 
 buildscript {
     repositories {
+        google()
         // Do not use `google()`, it prevents Dependabot from working properly
         maven {
             url 'https://maven.google.com'
@@ -65,7 +66,7 @@ dependencies {
     implementation libs.jetbrains.coroutinesCore
     implementation libs.jetbrains.coroutinesAndroid
 
-    testImplementation 'org.json:json:20220924'
+    testImplementation 'org.json:json:20230227'
     testImplementation libs.tests.junit
     androidTestImplementation libs.androidx.junit
     androidTestImplementation libs.androidx.espressoCore

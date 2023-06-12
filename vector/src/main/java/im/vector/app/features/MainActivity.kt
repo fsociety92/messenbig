@@ -82,6 +82,7 @@ data class MainActivityArgs(
 @AndroidEntryPoint
 class MainActivity : VectorBaseActivity<ActivityMainBinding>(), UnlockedActivity {
 
+
     companion object {
         private const val EXTRA_ARGS = "EXTRA_ARGS"
         private const val EXTRA_NEXT_INTENT = "EXTRA_NEXT_INTENT"

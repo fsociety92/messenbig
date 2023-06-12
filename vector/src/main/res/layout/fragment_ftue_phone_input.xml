@@ -39,7 +39,7 @@
             android:layout_height="0dp"
             android:adjustViewBounds="true"
             android:background="@drawable/circle"
-            android:backgroundTint="?colorSecondary"
+            android:backgroundTint="@color/vctr_live_location_dark"
             android:contentDescription="@null"
             android:src="@drawable/ic_ftue_phone"
             app:layout_constraintBottom_toTopOf="@id/phoneEntryHeaderTitle"
@@ -94,11 +94,23 @@
             app:layout_constraintStart_toStartOf="@id/phoneEntryGutterStart"
             app:layout_constraintTop_toBottomOf="@id/titleContentSpacing">
 
+            <com.hbb20.CountryCodePicker
+                android:id="@+id/CountryPicker"
+                android:layout_width="117dp"
+                android:layout_height="51dp"
+                app:ccp_arrowColor="@color/element_name_07"
+                app:ccp_contentColor="@color/element_accent_dark"
+                app:ccpDialog_backgroundColor="@color/element_accent_light"
+                app:ccp_flagBorderColor="@color/element_accent_dark"
+                android:layout_marginTop="-50dp"
+                app:ccp_defaultNameCode="Kz" />
+
             <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="+"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
                 android:imeOptions="actionDone"
+                android:textColor="@color/element_accent_dark"
+                android:layout_marginStart="120dp"
                 android:inputType="phone"
                 android:maxLines="1" />
 

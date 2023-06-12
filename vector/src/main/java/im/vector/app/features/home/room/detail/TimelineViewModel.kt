@@ -54,6 +54,7 @@ import im.vector.app.features.crypto.verification.SupportedVerificationMethodsPr
 import im.vector.app.features.home.room.detail.RoomDetailAction.VoiceBroadcastAction
 import im.vector.app.features.home.room.detail.error.RoomNotFound
 import im.vector.app.features.home.room.detail.location.RedactLiveLocationShareEventUseCase
+import im.vector.app.features.home.room.detail.poll.VoteToPollUseCase
 import im.vector.app.features.home.room.detail.sticker.StickerPickerActionHandler
 import im.vector.app.features.home.room.detail.timeline.factory.TimelineFactory
 import im.vector.app.features.home.room.detail.timeline.url.PreviewUrlRetriever
@@ -90,7 +91,6 @@ import org.matrix.android.sdk.api.raw.RawService
 import org.matrix.android.sdk.api.session.Session
 import org.matrix.android.sdk.api.session.crypto.MXCryptoError
 import org.matrix.android.sdk.api.session.events.model.EventType
-import org.matrix.android.sdk.api.session.events.model.LocalEcho
 import org.matrix.android.sdk.api.session.events.model.RelationType
 import org.matrix.android.sdk.api.session.events.model.content.WithHeldCode
 import org.matrix.android.sdk.api.session.events.model.isAttachmentMessage
@@ -154,6 +154,7 @@ class TimelineViewModel @AssistedInject constructor(
         timelineFactory: TimelineFactory,
         private val spaceStateHandler: SpaceStateHandler,
         private val voiceBroadcastHelper: VoiceBroadcastHelper,
+        private val voteToPollUseCase: VoteToPollUseCase,
 ) : VectorViewModel<RoomDetailViewState, RoomDetailAction, RoomDetailViewEvents>(initialState),
         Timeline.Listener, ChatEffectManager.Delegate, CallProtocolsChecker.Listener, LocationSharingServiceConnection.Callback {
 
@@ -1038,7 +1039,7 @@ class TimelineViewModel @AssistedInject constructor(
         if (action.highlight) {
             setState { copy(highlightedEventId = targetEventId) }
         }
-        _viewEvents.post(RoomDetailViewEvents.NavigateToEvent(targetEventId))
+        _viewEvents.post(RoomDetailViewEvents.NavigateToEvent(targetEventId, action.isFirstUnreadEvent))
     }
 
     private fun handleResendEvent(action: RoomDetailAction.ResendMessage) {
@@ -1241,15 +1242,11 @@ class TimelineViewModel @AssistedInject constructor(
 
     private fun handleVoteToPoll(action: RoomDetailAction.VoteToPoll) {
         if (room == null) return
-        // Do not allow to vote unsent local echo of the poll event
-        if (LocalEcho.isLocalEchoId(action.eventId)) return
-        // Do not allow to vote the same option twice
-        room.getTimelineEvent(action.eventId)?.let { pollTimelineEvent ->
-            val currentVote = pollTimelineEvent.annotations?.pollResponseSummary?.aggregatedContent?.myVote
-            if (currentVote != action.optionKey) {
-                room.sendService().voteToPoll(action.eventId, action.optionKey)
-            }
-        }
+        voteToPollUseCase.execute(
+                roomId = room.roomId,
+                pollEventId = action.eventId,
+                optionId = action.optionKey,
+        )
     }
 
     private fun handleEndPoll(eventId: String) {
@@ -1334,13 +1331,17 @@ class TimelineViewModel @AssistedInject constructor(
             computeUnreadState(timelineEvents, roomSummary)
         }
                 // We don't want live update of unread so we skip when we already had a HasUnread or HasNoUnread
-                // However, we want to update an existing HasUnread, if the readMarkerId hasn't changed,
+                // However, we want to update an existing HasUnread, if the readMarkerId hasn't changed or when we go back in live,
                 // as we might be loading new events to fill gaps in the timeline.
                 .distinctUntilChanged { previous, current ->
                     when {
                         previous is UnreadState.Unknown || previous is UnreadState.ReadMarkerNotLoaded -> false
                         previous is UnreadState.HasUnread && current is UnreadState.HasUnread &&
                                 previous.readMarkerId == current.readMarkerId -> false
+                        previous is UnreadState.HasUnread && (
+                                current is UnreadState.HasUnread && previous.firstUnreadEventId != current.firstUnreadEventId ||
+                                        current is UnreadState.HasNoUnread
+                                ) && timeline?.isLive.orFalse() -> false
                         current is UnreadState.HasUnread || current is UnreadState.HasNoUnread -> true
                         else -> false
                     }

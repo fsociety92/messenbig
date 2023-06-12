@@ -31,6 +31,7 @@ import im.vector.app.R
 import im.vector.app.espresso.tools.waitUntilViewVisible
 import im.vector.app.features.DefaultVectorFeatures
 import im.vector.app.waitForView
+import java.util.UUID
 
 class OnboardingRobot {
     private val defaultVectorFeatures = DefaultVectorFeatures()
@@ -127,9 +128,9 @@ class OnboardingRobot {
         clickOn(R.id.chooseServerSubmit)
         waitUntilViewVisible(withId(R.id.loginRoot))
 
-        writeTo(R.id.loginInput, userId)
+        writeTo(R.id.ccp + R.id.loginInput, userId)
         writeTo(R.id.loginPasswordInput, password)
-        clickOn(R.id.loginSubmit)
+        clickOn(R.id.ccp + R.id.loginSubmit)
     }
 
     private fun initSession(

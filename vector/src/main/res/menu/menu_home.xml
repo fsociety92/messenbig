@@ -30,6 +30,16 @@
         tools:ignore="HardcodedText" />
 
     <item
+        android:id="@+id/podat_reklamu"
+        android:title="@string/give_an_add"
+        tools:ignore="HardcodedText" />
+
+    <item
+        android:id="@+id/oblachka"
+        android:title="@string/oblachka"
+        tools:ignore="HardcodedText" />
+
+    <item
         android:id="@+id/menu_home_filter"
         android:icon="@drawable/ic_filter"
         android:title="@string/home_filter_placeholder_home"

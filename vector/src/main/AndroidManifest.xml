@@ -18,6 +18,8 @@
 
     <!-- https://developer.android.com/develop/ui/views/notifications/notification-permission#exemptions -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+
 
     <!-- Call feature -->
     <uses-permission android:name="android.permission.MANAGE_OWN_CALLS" />
@@ -35,7 +37,6 @@
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <!-- To be able to install APK from the application -->
-    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 
     <!-- Location Sharing -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -352,6 +353,7 @@
         <activity android:name=".features.settings.devices.v2.details.SessionDetailsActivity" />
         <activity android:name=".features.settings.devices.v2.rename.RenameSessionActivity" />
         <activity android:name=".features.login.qr.QrCodeLoginActivity" />
+        <activity android:name=".features.roomprofile.polls.detail.ui.RoomPollDetailActivity" />
 
         <!-- Services -->
 

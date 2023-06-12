@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+
 package im.vector.app.features.onboarding.ftueauth
 
 import android.app.Activity
@@ -27,12 +28,15 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.autofill.HintConstants
 import androidx.core.view.isVisible
+import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import com.famous.coader.countrycodepicker.testCountryCode
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
+import com.hbb20.CountryCodePicker
 import dagger.hilt.android.AndroidEntryPoint
 import im.vector.app.R
 import im.vector.app.core.extensions.clearErrorOnChange
@@ -49,7 +53,6 @@ import im.vector.app.features.VectorFeatures
 import im.vector.app.features.login.LoginMode
 import im.vector.app.features.login.SSORedirectRouterActivity
 import im.vector.app.features.login.SocialLoginButtonsView
-import im.vector.app.features.login.SsoState
 import im.vector.app.features.login.qr.QrCodeLoginArgs
 import im.vector.app.features.login.qr.QrCodeLoginType
 import im.vector.app.features.login.render
@@ -59,6 +62,7 @@ import im.vector.app.features.onboarding.OnboardingViewState
 import io.realm.Realm
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
+import org.matrix.android.sdk.api.auth.SSOAction
 import reactivecircus.flowbinding.android.widget.textChanges
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
@@ -171,40 +175,40 @@ class FtueAuthCombinedLoginFragment :
 
         combine(views.loginInput.editText().textChanges(), views.loginPasswordInput.editText().textChanges()) { account, password ->
             views.loginSubmit.isEnabled = account.isNotEmpty() && password.isNotEmpty()
-        }.launchIn(viewLifecycleOwner.lifecycleScope)
+        }.flowWithLifecycle(lifecycle).launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
     private fun submit() {
         cleanupUi()
         val number = views.loginInput.content()
-        when (val result = phoneNumberParser.parseInternationalNumber(number)) {
-            PhoneNumberParser.Result.ErrorInvalidNumber -> views.loginInput.error = getString(R.string.login_msisdn_error_other)
-            PhoneNumberParser.Result.ErrorMissingInternationalCode -> views.loginInput.error = getString(R.string.login_msisdn_error_not_international)
-            is PhoneNumberParser.Result.Success -> {
-                val (countryCode, phoneNumber) = result
-                loginFieldsValidation.validate(views.loginInput.content(), views.loginPasswordInput.content())
-                        .onUsernameOrIdError { views.loginInput.error = it }
-                        .onPasswordError { views.loginPasswordInput.error = it }
-                        .onValid { _, _ ->
-                            initialDeviceName = getString(R.string.login_default_session_public_name)
-                            this.countryCode = countryCode
-                            this.phoneNumber = phoneNumber
-                            val editor = Realm.getApplicationContext()?.getSharedPreferences("bigstar", Context.MODE_PRIVATE)?.edit()
-                            editor?.putString("phone_number", phoneNumber)
-                            editor?.apply()
+        val countryCodePicker: CountryCodePicker = views.CountryCodePicker
+        val countryCode = countryCodePicker.selectedCountryCode
+        this.countryCode = "+$countryCode"
+        this.phoneNumber = this.countryCode + number
+        loginFieldsValidation.validate(this.phoneNumber, views.loginPasswordInput.content())
+                .onUsernameOrIdError { views.loginInput.error = it }
+                .onPasswordError { views.loginPasswordInput.error = it }
+                .onValid { _, _ ->
+                    initialDeviceName = getString(R.string.login_default_session_public_name)
+                    val editor = Realm.getApplicationContext()?.getSharedPreferences("bigstar", Context.MODE_PRIVATE)?.edit()
+                    editor?.putString("phone_number", phoneNumber)
+                    editor?.apply()
 
-                            val options = PhoneAuthOptions.newBuilder(auth)
-                                    .setPhoneNumber(phoneNumber)       // Phone number to verify
-                                    .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
-                                    .setActivity(requireActivity())                 // Activity (for callback binding)
-                                    .setCallbacks(callbacks)          // OnVerificationStateChangedCallbacks
-                                    .build()
-                            PhoneAuthProvider.verifyPhoneNumber(options)
+                    val options = PhoneAuthOptions.newBuilder(auth)
+                            .setPhoneNumber(this.phoneNumber)       // Phone number to verify
+                            .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
+                            .setActivity(requireActivity())                 // Activity (for callback binding)
+                            .setCallbacks(callbacks)          // OnVerificationStateChangedCallbacks
+                            .build()
+                    PhoneAuthProvider.verifyPhoneNumber(options)
 
-                        }
-            }
-        }
+                    println("xuisosi")
+                    println(number)
+                    println(countryCode)
+                    println(this.phoneNumber)
+                }
     }
+
 
     private fun cleanupUi() {
         views.loginSubmit.hideKeyboard()
@@ -241,11 +245,11 @@ class FtueAuthCombinedLoginFragment :
         when (state.selectedHomeserver.preferredLoginMode) {
             is LoginMode.SsoAndPassword -> {
                 showUsernamePassword()
-                renderSsoProviders(state.deviceId, state.selectedHomeserver.preferredLoginMode.ssoState)
+                renderSsoProviders(state.deviceId, state.selectedHomeserver.preferredLoginMode)
             }
             is LoginMode.Sso -> {
                 hideUsernamePassword()
-                renderSsoProviders(state.deviceId, state.selectedHomeserver.preferredLoginMode.ssoState)
+                renderSsoProviders(state.deviceId, state.selectedHomeserver.preferredLoginMode)
             }
             else -> {
                 showUsernamePassword()
@@ -254,14 +258,15 @@ class FtueAuthCombinedLoginFragment :
         }
     }
 
-    private fun renderSsoProviders(deviceId: String?, ssoState: SsoState) {
+    private fun renderSsoProviders(deviceId: String?, loginMode: LoginMode) {
         views.ssoGroup.isVisible = true
         views.ssoButtonsHeader.isVisible = isUsernameAndPasswordVisible()
-        views.ssoButtons.render(ssoState, SocialLoginButtonsView.Mode.MODE_CONTINUE) { id ->
+        views.ssoButtons.render(loginMode, SocialLoginButtonsView.Mode.MODE_CONTINUE) { id ->
             viewModel.fetchSsoUrl(
                     redirectUrl = SSORedirectRouterActivity.VECTOR_REDIRECT_URL,
                     deviceId = deviceId,
-                    provider = id
+                    provider = id,
+                    action = SSOAction.LOGIN
             )?.let { openInCustomTab(it) }
         }
     }

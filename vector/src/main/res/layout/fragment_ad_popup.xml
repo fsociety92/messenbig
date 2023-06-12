@@ -79,13 +79,35 @@
             android:paddingBottom="40dp">
 
             <ImageView
-                android:id="@+id/iv_ad_bigstar"
+                android:id="@+id/iv_ad_phoneNumber"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:clickable="true"
                 android:contentDescription="@string/image_description"
                 android:focusable="true"
+                android:src="@drawable/ic_phone" />
+
+            <ImageView
+                android:id="@+id/iv_ad_whatsApp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:clickable="true"
+                android:layout_marginStart="30dp"
+                android:contentDescription="@string/image_description"
+                android:focusable="true"
                 android:src="@drawable/ic_bigstar" />
+
+
+            <ImageView
+                android:id="@+id/iv_ad_bigstar"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="30dp"
+                android:clickable="true"
+                android:contentDescription="@string/image_description"
+                android:focusable="true"
+                android:src="@drawable/ic_bigstar"
+                android:visibility="gone" />
 
             <ImageView
                 android:id="@+id/iv_ad_instagram"

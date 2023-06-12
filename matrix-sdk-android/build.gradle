@@ -18,9 +18,6 @@ buildscript {
     }
     dependencies {
         classpath "io.realm:realm-gradle-plugin:10.11.1"
-
-        //noinspection GradlePluginVersion
-        classpath 'com.android.tools.build:gradle:2.3.0'
     }
 }
 
@@ -65,7 +62,7 @@ android {
         // that the app's state is completely cleared between tests.
         testInstrumentationRunnerArguments clearPackageData: 'true'
 
-        buildConfigField "String", "SDK_VERSION", "\"1.5.16\""
+        buildConfigField "String", "SDK_VERSION", "\"1.5.24\""
 
         buildConfigField "String", "GIT_SDK_REVISION", "\"${gitRevision()}\""
         buildConfigField "String", "GIT_SDK_REVISION_UNIX_DATE", "\"${gitRevisionUnixDate()}\""
@@ -84,7 +81,7 @@ android {
     buildTypes {
         debug {
             if (project.hasProperty("coverage")) {
-                testCoverageEnabled = coverage.enableTestCoverage
+                testCoverageEnabled = coverage == "true"
             }
             // Set to true to log privacy or sensible data, such as token
             buildConfigField "boolean", "LOG_PRIVATE_DATA", project.property("vector.debugPrivateData")

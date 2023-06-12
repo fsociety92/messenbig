@@ -43,8 +43,8 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import im.vector.app.core.platform.VectorBaseBottomSheetDialogFragment
-import im.vector.app.core.time.DefaultClock
 import im.vector.app.espresso.tools.waitUntilViewVisible
+import im.vector.lib.core.utils.timer.DefaultClock
 import org.hamcrest.Matcher
 import org.hamcrest.Matchers
 import org.hamcrest.StringDescription
@@ -150,7 +150,7 @@ fun initialSyncIdlingResource(session: Session): IdlingResource {
             this.callback = callback
         }
 
-        override fun onChanged(t: SyncState?) {
+        override fun onChanged(value: SyncState) {
             val isIdle = session.syncService().hasAlreadySynced()
             if (isIdle) {
                 callback?.onTransitionToIdle()
@@ -241,10 +241,10 @@ fun allSecretsKnownIdling(session: Session): IdlingResource {
             this.callback = callback
         }
 
-        override fun onChanged(t: Optional<PrivateKeysInfo>?) {
-            println("*** [$name]  allSecretsKnownIdling ${t?.getOrNull()}")
-            privateKeysInfo = t?.getOrNull()
-            if (t?.getOrNull()?.allKnown() == true) {
+        override fun onChanged(value: Optional<PrivateKeysInfo>) {
+            println("*** [$name]  allSecretsKnownIdling ${value.getOrNull()}")
+            privateKeysInfo = value.getOrNull()
+            if (value.getOrNull()?.allKnown() == true) {
                 session.cryptoService().crossSigningService().getLiveCrossSigningPrivateKeys().removeObserver(this)
                 callback?.onTransitionToIdle()
             }

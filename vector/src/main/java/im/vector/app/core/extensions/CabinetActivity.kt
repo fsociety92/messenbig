@@ -31,7 +31,6 @@ import com.bumptech.glide.request.RequestOptions
 import com.github.drjacky.imagepicker.ImagePicker
 import com.google.android.flexbox.FlexboxLayout
 import im.vector.app.R
-import im.vector.app.core.resources.StringProvider
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.FormBody
@@ -51,7 +50,6 @@ import java.net.URL
 import java.security.MessageDigest
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
-import javax.inject.Inject
 
 fun String.toEditable(): Editable = Editable.Factory.getInstance().newEditable(this)
 
@@ -285,7 +283,6 @@ CabinetActivity : AppCompatActivity() {
                 .add("bannerUuid", bannerFileUuid!!)
                 .add("advertiserUuid", advertiserUuid!!)
                 .add("email", "example@gmail.com")
-                .add("phoneNumber", "7777777777")
                 .add(
                         "startsAt",
                         LocalDate.now().plusDays(1).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
@@ -304,7 +301,8 @@ CabinetActivity : AppCompatActivity() {
             formBody.add("instagramUrl", findViewById<EditText>(R.id.text_instagram_url).text.toString())
         if (findViewById<EditText>(R.id.text_website_url).text.isNotEmpty())
             formBody.add("websiteUrl", findViewById<EditText>(R.id.text_website_url).text.toString())
-
+        if (findViewById<EditText>(R.id.text_phoneNumber_url).text.isNotEmpty())
+            formBody.add("phoneNumber", findViewById<EditText>(R.id.text_phoneNumber_url).text.toString())
         selectedCities.forEachIndexed { index, uuid ->
             formBody.add("cityUuids[$index]", uuid)
         }

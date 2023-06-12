@@ -1,5 +1,6 @@
 package com.contusfly.views
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
 import android.content.Context
@@ -21,13 +22,9 @@ import com.bumptech.glide.Priority
 import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
-import dagger.hilt.android.EntryPointAccessors
 import im.vector.app.R
-import im.vector.app.core.di.ActivityEntryPoint
 import im.vector.app.core.extensions.singletonEntryPoint
 import im.vector.app.core.glide.GlideApp
-import im.vector.app.features.home.room.detail.timeline.action.EventSharedAction
-import im.vector.app.features.home.room.detail.timeline.action.MessageSharedActionViewModel
 import im.vector.app.features.navigation.Navigator
 import okhttp3.Call
 import okhttp3.Callback
@@ -81,6 +78,7 @@ class AdPopUp(
         } else imgView.setImageDrawable(errorImg)
     }
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -105,10 +103,17 @@ class AdPopUp(
         val ivAdInstagram = findViewById<ImageView>(R.id.iv_ad_instagram)
         val ivAdBigstar = findViewById<ImageView>(R.id.iv_ad_bigstar)
         val ivAdWebsite = findViewById<ImageView>(R.id.iv_ad_website)
+        val ivAdTel = findViewById<ImageView>(R.id.iv_ad_phoneNumber)
+        val ivAdWhatsApp = findViewById<ImageView>(R.id.iv_ad_whatsApp)
+
         val youtubeUrl = ad.getString("youtubeUrl")
         val instagramUrl = ad.getString("instagramUrl")
         val bigstarUrl = ad.getString("bigstarUrl")
         val websiteUrl = ad.getString("websiteUrl")
+
+        val phoneNumber = ad.getString("phoneNumber")
+        val telUrl = "tel:${phoneNumber}"
+        val whatsAppUrl = "https://api.whatsapp.com/send?phone=${phoneNumber}&text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%9F%D0%B8%D1%88%D1%83%20%D0%B2%D0%B0%D0%BC%20%D0%B8%D0%B7%20BigStar%20Messenger"
 
         if (bigstarUrl.isNotEmpty()) {
             ivAdBigstar.setImageResource(R.drawable.ic_bigstar_active)
@@ -158,7 +163,7 @@ class AdPopUp(
             }
         }
 
-        if (youtubeUrl.isNotEmpty()) {
+        if (youtubeUrl.isEmpty()) {
             ivAdYoutube.setImageResource(R.drawable.ic_youtube_active)
             ivAdYoutube.setOnClickListener {
                 val okHttpClient = OkHttpClient()
@@ -181,6 +186,9 @@ class AdPopUp(
                 startActivity(context, openURL, null)
             }
         }
+//        else if (youtubeUrl.isEmpty()) {
+//            ivAdYoutube.setImageResource(R.drawable.ic_youtube)
+//        }
 
         if (websiteUrl.isNotEmpty()) {
             ivAdWebsite.setImageResource(R.drawable.ic_website_active)
@@ -202,6 +210,24 @@ class AdPopUp(
 
                 val openURL = Intent(Intent.ACTION_VIEW)
                 openURL.data = Uri.parse(websiteUrl)
+                startActivity(context, openURL, null)
+            }
+        }
+
+        if (telUrl.isNotEmpty()) {
+            ivAdTel.setImageResource(R.drawable.ic_phone)
+            ivAdTel.setOnClickListener {
+                val openURL = Intent(Intent.ACTION_VIEW)
+                openURL.data = Uri.parse(telUrl)
+                startActivity(context, openURL, null)
+            }
+        }
+
+        if (whatsAppUrl.isNotEmpty()) {
+            ivAdWhatsApp.setImageResource(R.drawable.ic_bigstar_active)
+            ivAdWhatsApp.setOnClickListener {
+                val openURL = Intent(Intent.ACTION_VIEW)
+                openURL.data = Uri.parse(whatsAppUrl)
                 startActivity(context, openURL, null)
             }
         }

@@ -16,11 +16,13 @@
 
 package im.vector.app.features.onboarding.ftueauth
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
+import com.hbb20.CountryCodePicker
 import dagger.hilt.android.AndroidEntryPoint
 import im.vector.app.R
 import im.vector.app.core.extensions.associateContentStateWith
@@ -71,20 +73,16 @@ class FtueAuthPhoneEntryFragment :
 
     private fun updatePhoneNumber() {
         val number = views.phoneEntryInput.content()
-
-        when (val result = phoneNumberParser.parseInternationalNumber(number)) {
-            PhoneNumberParser.Result.ErrorInvalidNumber -> views.phoneEntryInput.error = getString(R.string.login_msisdn_error_other)
-            PhoneNumberParser.Result.ErrorMissingInternationalCode -> views.phoneEntryInput.error = getString(R.string.login_msisdn_error_not_international)
-            is PhoneNumberParser.Result.Success -> {
-                val (countryCode, phoneNumber) = result
+        val countryCodePicker: CountryCodePicker = views.CountryPicker
+        val countryCode = "+" + countryCodePicker.selectedCountryCode
+        val phoneNumber = countryCode + number
                 viewModel.handle(OnboardingAction.PostRegisterAction(RegisterAction.AddThreePid(RegisterThreePid.Msisdn(phoneNumber, countryCode))))
-            }
         }
-    }
 
-    override fun updateWithState(state: OnboardingViewState) {
-        views.phoneEntryHeaderSubtitle.text = getString(R.string.ftue_auth_phone_subtitle, state.selectedHomeserver.userFacingUrl.toReducedUrl())
-    }
+//    @SuppressLint("StringFormatInvalid")
+//    override fun updateWithState(state: OnboardingViewState) {
+//        views.phoneEntryHeaderSubtitle.text = getString(R.string.ftue_auth_phone_subtitle, state.selectedHomeserver.userFacingUrl.toReducedUrl())
+//    }
 
     override fun onError(throwable: Throwable) {
         views.phoneEntryInput.error = errorFormatter.toHumanReadable(throwable)
