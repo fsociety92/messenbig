@@ -208,7 +208,7 @@ dependencies {
     implementation 'com.google.android.flexbox:flexbox:3.0.0'
     implementation libs.androidx.autoFill
     implementation 'jp.wasabeef:glide-transformations:4.3.0'
-    implementation 'com.github.hyuwah:DraggableView:1.0.0'
+    implementation 'com.github.hyuwah:DraggableView:1.0.1'
     implementation 'com.github.akshaaatt:Sliding-Carousel:1.0.4'
     implementation 'me.relex:circleindicator:2.1.6'
     implementation 'com.android.installreferrer:installreferrer:2.2'
