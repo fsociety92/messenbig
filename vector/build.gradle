@@ -212,7 +212,7 @@ dependencies {
     implementation 'com.github.akshaaatt:Sliding-Carousel:1.0.4'
     implementation 'me.relex:circleindicator:2.1.6'
     implementation 'com.android.installreferrer:installreferrer:2.2'
-    implementation 'io.michaelrocks:libphonenumber-android:8.12.19-2'
+    implementation 'io.michaelrocks:libphonenumber-android:8.13.17'
 //    implementation 'com.github.ongakuer:circleindicator:2.1.6'
     implementation 'com.yandex.android:mobmetricalib:5.3.0'
 
