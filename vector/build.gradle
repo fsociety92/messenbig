@@ -146,7 +146,7 @@ dependencies {
 
     implementation libs.squareup.moshi
     implementation 'com.google.android.gms:play-services-basement:18.1.0'
-    implementation 'com.google.firebase:firebase-auth-ktx:21.1.0'
+    implementation 'com.google.firebase:firebase-auth-ktx:22.1.1'
     kapt libs.squareup.moshiKotlin
 
     // Lifecycle
