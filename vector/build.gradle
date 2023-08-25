@@ -269,9 +269,9 @@ dependencies {
     // WebRTC
     // org.webrtc:google-webrtc is for development purposes only
     // implementation 'org.webrtc:google-webrtc:1.0.+'
-//    implementation('com.facebook.react:react-native-webrtc:1.106.1-jitsi-12421094@aar')
+//    implementation('com.facebook.react:react-native-webrtc:111.0.3-jitsi-14665394@aar')
 //    implementation('com.facebook.react:react-native-webrtc:1.106.1-jitsi-12039821@aar')
-    implementation('com.facebook.react:react-native-webrtc:1.106.1-jitsi-12421094@aar')
+    implementation('com.facebook.react:react-native-webrtc:111.0.3-jitsi-14665394@aar')
     implementation('com.facebook.react:react-native-amplitude:2.7.0-jitsi-12421094')
 //    implementation('com.facebook.react:react-native-amplitude:2.7.0-jitsi-12421094')
     // Jitsi
